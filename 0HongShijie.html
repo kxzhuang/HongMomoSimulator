@@ -1024,7 +1024,7 @@
             // 停止计时器
             clearInterval(timerInterval);
             timerBar.classList.remove('timer-active');
-        
+
             // 在这里添加设置时间条宽度的代码
             timerBar.style.width = `${(timeLeft / gameState.timerDuration) * 100}%`;
 
@@ -1262,7 +1262,7 @@
             // 继续游戏
             continueGame();
         }
-
+        
         // 结束游戏
         function endGame() {
             // 停止计时器
@@ -1286,35 +1286,43 @@
             randomEventsElement.textContent = gameState.eventCount;
             timeoutCount.textContent = gameState.timeoutCount;
 
-            // 判断游戏结果
-            const victory = gameState.score >= 95 && gameState.correctAnswers >= 95;
-            const goodEnding = gameState.score >= 80 && gameState.correctAnswers >= 80;
-            const neutralEnding = gameState.score >= 60 && gameState.correctAnswers >= 60;
+            // 判断游戏结果 - 修改胜利条件逻辑
+            const highScore = gameState.score >= 95;          // 高分 - 获得师姐青睐
+            const highCorrect = gameState.correctAnswers >= 95; // 高正确率 - 实验技术精通
 
             // 设置结果描述
-            if (victory) {
+            if (highScore && highCorrect) {
+                // 双高 - 完美结局
                 resultTitle.textContent = "完美通关！";
-                resultDesc.textContent = "恭喜你成功完成所有问题！你对实验技术的掌握令人印象深刻！";
+                resultDesc.textContent = "恭喜你！不仅精通了实验技术，也获得了师姐的青睐。你是实验室里的传奇！";
                 resultBorder.className = "border-l-4 border-green-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"太厉害了！你的知识水平非常扎实，我对你刮目相看！"`;
-            } else if (goodEnding) {
-                resultTitle.textContent = "优秀通关！";
-                resultDesc.textContent = "你表现出了扎实的知识基础，只有少数问题没有答对。继续保持！";
+                document.getElementById('momo-final-quote').textContent = `"太厉害了！你的知识水平非常扎实，前途无量，以后多指教我哦！"`;
+            } else if (highScore && !highCorrect) {
+                // 高分低正确率 - 获得师姐青睐但技术一般
+                resultTitle.textContent = "感情胜利！";
+                resultDesc.textContent = "虽然你的实验技术还有待提高，但你赢得了师姐的好感。有时候，人际关系比技术更重要！";
+                resultBorder.className = "border-l-4 border-pink-500 pl-3 mb-6";
+                document.getElementById('momo-final-quote').textContent = `"虽然你的实验做得一般，但是我很喜欢你的态度和热情！我可以教你更多知识~"`;
+            } else if (!highScore && highCorrect) {
+                // 低分高正确率 - 技术精湛但没获得师姐青睐
+                resultTitle.textContent = "技术胜利！";
+                resultDesc.textContent = "你的实验技术非常出色，但似乎忽略了与师姐的沟通。记住，实验室里不只有实验！";
                 resultBorder.className = "border-l-4 border-blue-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"很不错，你对基础知识掌握得相当好！"`;
-            } else if (neutralEnding) {
+                document.getElementById('momo-final-quote').textContent = `"你的实验技术确实很强，但你总是那么冷淡...多和师姐交流一下嘛！"`;
+            } else if (gameState.score >= 60 || gameState.correctAnswers >= 60) {
+                // 一般表现 - 及格但不出色
                 resultTitle.textContent = "基本通关";
-                resultDesc.textContent = "你对基础知识有一定掌握，但还有提升空间。建议继续加强学习！";
+                resultDesc.textContent = "你的表现还算及格，但无论是实验技术还是与师姐的关系，都还有很大提升空间。";
                 resultBorder.className = "border-l-4 border-yellow-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"还不错，但需要更加努力学习这些基础知识。"`;
+                document.getElementById('momo-final-quote').textContent = `"还不错，但需要更加努力，无论是实验还是...其他方面。"`;
             } else {
+                // 双低 - 失败
                 resultTitle.textContent = "挑战失败";
-                resultDesc.textContent = "你对这些实验技术的理解还有所欠缺。建议回去复习基础知识，再来挑战！";
+                resultDesc.textContent = "无论是实验技术还是与师姐的交流，你都表现欠佳。建议重新调整策略，再来一次！";
                 resultBorder.className = "border-l-4 border-red-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"基础知识太薄弱了，需要好好复习一下基本概念。"`;
+                document.getElementById('momo-final-quote').textContent = `"唉，看来你还需要多多练习，实验技术和社交技巧都是..."`;
             }
         }
-
         // 更新最终结果表情
         function updateFinalEmojis() {
             // 得分表情
