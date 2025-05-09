@@ -147,7 +147,7 @@
                     </div>
                     
                     <!-- 叩叩心情值 -->
-                    <div class="flex justify-between items-center mb-1">
+                    <!-- <div class="flex justify-between items-center mb-1">
                         <span class="text-sm text-gray-600">叩叩心情值</span>
                         <div class="flex items-center">
                             <span id="koko-mood-emoji" class="mr-1">😰</span>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="progress-bar">
                         <div id="koko-mood-bar" class="progress-fill bg-red-500" style="width: 30%"></div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <!-- 回合和倒计时 -->
@@ -579,8 +579,9 @@ function updateStatusBars() {
     momoLoveBar.style.width = `${gameState.momoLove}%`;
     momoLoveValue.textContent = gameState.momoLove;
     
-    kokoMoodBar.style.width = `${gameState.kokoMood}%`;
-    kokoMoodValue.textContent = gameState.kokoMood;
+    // 注释掉叩叩心情值的更新
+    // kokoMoodBar.style.width = `${gameState.kokoMood}%`;
+    // kokoMoodValue.textContent = gameState.kokoMood;
     
     // 根据心情值更新状态栏颜色和表情
     updateBarColors();
@@ -627,7 +628,8 @@ function updateBarColors() {
         momoLoveEmoji.textContent = "💖";
     }
     
-    // 叩叩心情值颜色和表情
+    // 注释掉叩叩心情值的颜色和表情更新
+    /*
     if (gameState.kokoMood < 30) {
         kokoMoodBar.className = "progress-fill bg-red-500";
         kokoMoodEmoji.textContent = "😰";
@@ -641,6 +643,7 @@ function updateBarColors() {
         kokoMoodBar.className = "progress-fill bg-green-400";
         kokoMoodEmoji.textContent = "😌";
     }
+    */
 }
 
 // 更新魔魔的反馈
@@ -975,7 +978,8 @@ function updateFinalEmojis() {
         finalLoveEmoji.textContent = "💖";
     }
     
-    // 叩叩心情表情
+    // 注释掉叩叩心情值的表情更新
+    /*
     if (gameState.kokoMood < 30) {
         finalKokoEmoji.textContent = "😰";
     } else if (gameState.kokoMood < 60) {
@@ -985,6 +989,7 @@ function updateFinalEmojis() {
     } else {
         finalKokoEmoji.textContent = "😌";
     }
+    */
 }
 
 // 辅助函数：随机打乱数组
