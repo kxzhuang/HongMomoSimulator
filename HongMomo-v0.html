@@ -362,7 +362,7 @@
                     showFailureResult("叩叩的挫折", "你感到沮丧和疲惫，无法继续安抚魔魔的情绪。或许你们都需要一些时间。");
                 } else if (gameState.momoMood >= 90) {
                     showSuccessResult();
-                } else {
+                } else if (gameState.round >= 5) {
                     showNeutralResult();
                 }
                 
