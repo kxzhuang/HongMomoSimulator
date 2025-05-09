@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>叩叩模拟器 - 哄魔开心（困难模式）</title>
+    <title>师姐心情模拟器 - 中级模式</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,25 +12,40 @@
             background-color: #f5f5f5;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
         .option-btn:hover {
             background-color: #f0f7ff;
         }
+
         .progress-bar {
             height: 12px;
             border-radius: 6px;
             background-color: #e2e8f0;
             overflow: hidden;
         }
+
         .progress-fill {
             height: 100%;
             border-radius: 6px;
             transition: width 0.5s ease-out;
         }
+
         @keyframes timerAnimation {
-            from { width: 100%; background-color: #60a5fa; }
-            50% { background-color: #f59e0b; }
-            to { width: 0%; background-color: #ef4444; }
+            from {
+                width: 100%;
+                background-color: #60a5fa;
+            }
+
+            50% {
+                background-color: #f59e0b;
+            }
+
+            to {
+                width: 0%;
+                background-color: #ef4444;
+            }
         }
+
         .timer-bar {
             height: 6px;
             border-radius: 3px;
@@ -39,9 +55,11 @@
             animation-timing-function: linear;
             animation-play-state: paused;
         }
+
         .timer-active {
             animation-play-state: running;
         }
+
         .event-notification {
             animation: fadeInOut 4s ease-in-out;
             opacity: 0;
@@ -51,14 +69,27 @@
             transform: translate(-50%, -50%);
             z-index: 50;
         }
+
         @keyframes fadeInOut {
-            0% { opacity: 0; }
-            10% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
     <div class="max-w-md mx-auto bg-white shadow-sm min-h-screen relative">
         <!-- 顶部标题 -->
@@ -66,7 +97,7 @@
             <h1 class="text-xl font-bold text-red-800">师姐心情模拟器 - 中级模式</h1>
             <p class="text-gray-500 text-sm">哄开心（魔王级）</p>
         </div>
-        
+
         <!-- 随机事件通知 -->
         <div id="event-notification" class="event-notification hidden">
             <div class="bg-red-100 border-l-4 border-red-600 text-red-700 p-4 rounded shadow-lg">
@@ -74,15 +105,15 @@
                 <p id="event-desc">魔魔突然想起了你上个月忘记她生日的事情！</p>
             </div>
         </div>
-        
+
         <!-- 游戏界面容器 -->
         <div id="game-container">
             <!-- 开始游戏界面 -->
             <div id="start-screen" class="p-4">
                 <h2 class="text-lg font-bold mb-4 text-red-800">师姐心情模拟器</h2>
-                
+
                 <p class="mb-3 font-bold text-red-700">警告：师姐的心情持续下降，你必须迅速答题！</p>
-                
+
                 <div class="my-4 bg-gray-50 p-3 rounded">
                     <h3 class="font-bold mb-2">游戏规则：</h3>
                     <ul class="mb-3 pl-4 space-y-1 text-sm">
@@ -96,12 +127,13 @@
                         <li>• 心情低于40时，所有选项效果减半</li>
                     </ul>
                 </div>
-                
-                <button id="start-game-btn" class="w-full py-2 bg-red-100 text-red-800 border border-red-200 rounded text-center">
+
+                <button id="start-game-btn"
+                    class="w-full py-2 bg-red-100 text-red-800 border border-red-200 rounded text-center">
                     开始挑战
                 </button>
             </div>
-            
+
             <!-- 主游戏界面 -->
             <div id="main-game-screen" class="hidden">
                 <!-- 情景描述 -->
@@ -109,17 +141,17 @@
                     <p id="scene-description" class="text-gray-700">
                         你坐在魔魔的房间里，她非常生气地看着你。你之前说的话深深伤害了她，现在需要迅速解决这个危机。
                     </p>
-                    
+
                     <div class="my-4 pl-3 border-l-4 border-red-500">
                         <p class="font-bold text-red-600 mb-1">魔魔：</p>
                         <p id="momo-quote" class="text-gray-800">"不想理你了！你根本不在乎我的感受！"</p>
                     </div>
-                    
+
                     <!-- <div id="momo-needs" class="my-3 px-3 py-2 bg-red-50 text-sm text-red-700 rounded">
                         <p class="font-medium">魔魔的当前需求：<span id="current-need">未知</span></p>
                     </div> -->
                 </div>
-                
+
                 <!-- 状态指标 -->
                 <div class="px-4 py-3 bg-gray-50">
                     <!-- 魔魔心情值 -->
@@ -133,10 +165,10 @@
                     <div class="progress-bar mb-3">
                         <div id="momo-mood-bar" class="progress-fill bg-red-500" style="width: 30%"></div>
                     </div>
-                    
-                    <!-- 魔魔喜欢叩叩值 -->
+
+                    <!-- 魔魔喜欢你值 -->
                     <div class="flex justify-between items-center mb-1">
-                        <span class="text-sm text-gray-600">魔魔喜欢叩叩值</span>
+                        <span class="text-sm text-gray-600">魔魔喜欢你值</span>
                         <div class="flex items-center">
                             <span id="momo-love-emoji" class="mr-1">💔</span>
                             <span id="momo-love-value" class="text-sm font-medium">30</span>
@@ -145,10 +177,10 @@
                     <div class="progress-bar mb-3">
                         <div id="momo-love-bar" class="progress-fill bg-red-500" style="width: 30%"></div>
                     </div>
-                    
-                    <!-- 叩叩心情值 -->
+
+                    <!-- 你心情值 -->
                     <!-- <div class="flex justify-between items-center mb-1">
-                        <span class="text-sm text-gray-600">叩叩心情值</span>
+                        <span class="text-sm text-gray-600">你心情值</span>
                         <div class="flex items-center">
                             <span id="koko-mood-emoji" class="mr-1">😰</span>
                             <span id="koko-mood-value" class="text-sm font-medium">30</span>
@@ -158,7 +190,7 @@
                         <div id="koko-mood-bar" class="progress-fill bg-red-500" style="width: 30%"></div>
                     </div> -->
                 </div>
-                
+
                 <!-- 回合和倒计时 -->
                 <div class="p-4 pt-2 pb-0 flex justify-between items-center">
                     <span class="text-sm font-medium" id="round-counter">第1/10轮</span>
@@ -167,22 +199,22 @@
                 <div class="px-4 pt-1 pb-1">
                     <div class="timer-bar" id="timer-bar"></div>
                 </div>
-                
+
                 <!-- 选项区域 -->
                 <div id="options-container" class="p-4">
                     <!-- 选项将通过JavaScript动态生成 -->
                 </div>
             </div>
-            
+
             <!-- 结果界面 -->
             <div id="result-screen" class="hidden p-4">
                 <div class="border-l-4 pl-3 mb-6" id="result-border">
                     <h2 id="result-title" class="text-lg font-bold mb-2">游戏结束</h2>
-                    
+
                     <p id="result-desc" class="mb-4">
                         结果描述...
                     </p>
-                    
+
                     <div class="mb-4">
                         <p class="font-medium mb-1">最终指标：</p>
                         <div class="flex justify-between items-center mb-1">
@@ -193,23 +225,23 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center mb-1">
-                            <span class="text-sm">魔魔喜欢叩叩值：</span>
+                            <span class="text-sm">魔魔喜欢你值：</span>
                             <div class="flex items-center">
                                 <span id="final-love-emoji" class="mr-1">❤️</span>
                                 <span id="final-momo-love" class="font-medium">80</span>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm">叩叩心情值：</span>
+                        <!-- <div class="flex justify-between items-center">
+                            <span class="text-sm">你心情值：</span>
                             <div class="flex items-center">
                                 <span id="final-koko-emoji" class="mr-1">😌</span>
                                 <span id="final-koko-mood" class="font-medium">60</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    
+
                     <p id="momo-final-quote" class="italic text-gray-700 mb-3">"魔魔的最终评价..."</p>
-                    
+
                     <div class="bg-gray-50 p-3 rounded mb-4 text-sm">
                         <p class="font-medium mb-1">游戏数据：</p>
                         <div class="flex justify-between mb-1">
@@ -226,1132 +258,1176 @@
                         </div>
                     </div>
                 </div>
-                
-                <button id="restart-game-btn" class="w-full py-2 bg-red-100 text-red-800 border border-red-200 rounded text-center">
+
+                <button id="restart-game-btn"
+                    class="w-full py-2 bg-red-100 text-red-800 border border-red-200 rounded text-center">
                     重新挑战
                 </button>
             </div>
         </div>
     </div>
-    
+
     <script>
-// 游戏状态
-const gameState = {
-    score: 30,           // 玩家得分，替换原来的momoMood
-    correctAnswers: 30,  // 正确回答数，替换原来的momoLove
-    gameOver: false,     // 游戏是否结束
-    round: 0,            // 当前轮数
-    maxRounds: 10,       // 最大轮数
-    timeoutCount: 0,     // 超时次数
-    eventCount: 0,       // 随机事件触发次数
-    lastQuestionType: null, // 上一次问题的类型
-    currentQuestion: null,  // 当前问题
-    timerDuration: 30    // 计时器持续时间（秒）
-};
+        // 游戏状态
+        const gameState = {
+            score: 30,           // 玩家得分，替换原来的momoMood
+            correctAnswers: 30,  // 正确回答数，替换原来的momoLove
+            gameOver: false,     // 游戏是否结束
+            round: 0,            // 当前轮数
+            maxRounds: 10,       // 最大轮数
+            timeoutCount: 0,     // 超时次数
+            eventCount: 0,       // 随机事件触发次数
+            lastQuestionType: null, // 上一次问题的类型
+            currentQuestion: null,  // 当前问题
+            timerDuration: 30    // 计时器持续时间（秒）
+        };
 
-// 问题类型
-const questionTypes = {
-    COIP: "COIP",
-    WB: "Western Blot",
-    PROTEIN: "蛋白纯化",
-    CLONING: "分子克隆",
-    PCR: "PCR技术",
-    GEL: "凝胶电泳",
-    CELL: "细胞培养"
-};
-
-
-// 问题难度描述
-const difficultyDescriptions = {
-    [questionTypes.COIP]: "COIP技术问题",
-    [questionTypes.WB]: "Western Blot问题",
-    [questionTypes.PROTEIN]: "蛋白纯化问题",
-    [questionTypes.CLONING]: "分子克隆问题",
-    [questionTypes.PCR]: "PCR技术问题",
-    [questionTypes.GEL]: "凝胶电泳问题",
-    [questionTypes.CELL]: "细胞培养问题"
-};
-
-// // 魔魔的负面和正面话语
-// const momoNegativePhrases = [
-//     "不理你了！勾石！",
-//     "你根本不懂我！",
-//     "我很生气！",
-//     "你总是这样！",
-//     "我恨死你了！",
-//     "你根本不在乎我！",
-//     "我感觉你一点都不爱我...",
-//     "你就知道工作，都不陪我！"
-// ];
-
-// const momoPositivePhrases = [
-//     "棒棒！",
-//     "真可爱~",
-//     "赏猫！",
-//     "叩叩最好了！",
-//     "勉强原谅你一下下~",
-//     "嗯...你还算有点良心",
-//     "好啦好啦，不生气了~",
-//     "叩叩，爱你哦~"
-// ];
-
-// 师姐的负面和正面评语
-const negativeFeedback = [
-    "这都不会？你确定学过生物吗？",
-    "这么简单的问题都答错，再认真想想！",
-    "不对，这是基础知识，要复习一下了。",
-    "差远了，重新看看教材吧！",
-    "这个答案完全不对，你再想想？",
-    "错误，你是不是没听课？",
-    "不行不行，基础太差了！",
-    "这个都不知道，要加油了！"
-];
-
-const positiveFeedback = [
-    "回答正确，真棒！",
-    "很好，看来你掌握得不错！",
-    "对，就是这样！",
-    "答对了，继续保持！",
-    "非常好，你理解得很透彻！",
-    "正确！你的基础打得很牢固！",
-    "对的，你掌握了要点！",
-    "完全正确，你很有天赋！"
-];
+        // 问题类型
+        const questionTypes = {
+            COIP: "COIP",
+            WB: "Western Blot",
+            PROTEIN: "蛋白纯化",
+            CLONING: "分子克隆",
+            PCR: "PCR技术",
+            GEL: "凝胶电泳",
+            CELL: "细胞培养"
+        };
 
 
-// 随机事件
-const randomEventsData = [
-    {
-        title: "突发问题",
-        desc: "师姐突然想起一个难题要考你！",
-        scoreEffect: -15,
-        correctEffect: -10
-    },
-    {
-        title: "实验室紧急情况",
-        desc: "实验室的离心机出了故障，分散了你的注意力！",
-        scoreEffect: -10,
-        correctEffect: -15
-    },
-    {
-        title: "思路混乱",
-        desc: "你突然发现自己的笔记混乱了，知识点全搞混了...",
-        scoreEffect: -20,
-        correctEffect: -5
-    },
-    {
-        title: "疲劳影响",
-        desc: "连续实验让你太疲劳，思维变得迟钝！",
-        scoreEffect: -15,
-        correctEffect: -15
-    },
-    {
-        title: "知识漏洞",
-        desc: "你发现有一章内容完全没复习...",
-        scoreEffect: -5,
-        correctEffect: -20
-    }
-];
+        // 问题难度描述
+        const difficultyDescriptions = {
+            [questionTypes.COIP]: "COIP技术问题",
+            [questionTypes.WB]: "Western Blot问题",
+            [questionTypes.PROTEIN]: "蛋白纯化问题",
+            [questionTypes.CLONING]: "分子克隆问题",
+            [questionTypes.PCR]: "PCR技术问题",
+            [questionTypes.GEL]: "凝胶电泳问题",
+            [questionTypes.CELL]: "细胞培养问题"
+        };
 
-// // 选项池
-// const optionPool = [
-//     // 道歉类选项
-//     { 
-//         text: "对不起，魔魔，我不应该说那些话伤害你的感受。", 
-//         mood: 12, 
-//         love: 10, 
-//         self: -5,
-//         type: optionTypes.APOLOGY 
-//     },
-//     { 
-//         text: "魔魔，我真的很抱歉，我说话不经思考，伤害了你。", 
-//         mood: 15, 
-//         love: 12, 
-//         self: -8,
-//         type: optionTypes.APOLOGY 
-//     },
-//     { 
-//         text: "我错了，那些话我不该说，伤害了你我很后悔。", 
-//         mood: 10, 
-//         love: 8, 
-//         self: -10,
-//         type: optionTypes.APOLOGY 
-//     },
-    
-//     // 礼物类选项
-//     { 
-//         text: "我给你买了你最喜欢的奶茶，加了两份珍珠。", 
-//         mood: 8, 
-//         love: 12, 
-//         self: -8,
-//         type: optionTypes.GIFT 
-//     },
-//     { 
-//         text: "看，我偷偷给你准备了这个小礼物，希望你会喜欢。", 
-//         mood: 10, 
-//         love: 15, 
-//         self: -10,
-//         type: optionTypes.GIFT 
-//     },
-//     { 
-//         text: "给魔魔买了你最爱吃的肉肉，现在就去做给你吃！", 
-//         mood: 12, 
-//         love: 18, 
-//         self: -8,
-//         type: optionTypes.GIFT 
-//     },
-    
-//     // 肢体接触类选项
-//     { 
-//         text: "过来，亲亲魔魔~", 
-//         mood: 15, 
-//         love: 18, 
-//         self: -5,
-//         type: optionTypes.PHYSICAL 
-//     },
-//     { 
-//         text: "要不要抱抱？我知道抱抱可以让你舒服一点。", 
-//         mood: 12, 
-//         love: 15, 
-//         self: -3,
-//         type: optionTypes.PHYSICAL 
-//     },
-//     { 
-//         text: "来，举高高！", 
-//         mood: 18, 
-//         love: 15, 
-//         self: -8,
-//         type: optionTypes.PHYSICAL 
-//     },
-    
-//     // 高质量陪伴选项
-//     { 
-//         text: "我们一起去吃你最喜欢的那家火锅吧？我知道你想去很久了。", 
-//         mood: 10, 
-//         love: 12, 
-//         self: -3,
-//         type: optionTypes.QUALITY_TIME 
-//     },
-//     { 
-//         text: "要不我们一起出去散散步？散步时我可以听你说说心里的想法。", 
-//         mood: 12, 
-//         love: 15, 
-//         self: 0,
-//         type: optionTypes.QUALITY_TIME 
-//     },
-//     { 
-//         text: "魔魔，我们一起看个电影放松一下吧。你挑你喜欢的！", 
-//         mood: 8, 
-//         love: 10, 
-//         self: 0,
-//         type: optionTypes.QUALITY_TIME 
-//     },
-    
-//     // 承诺类选项
-//     { 
-//         text: "我以后会更注意自己的言行，不会再这样伤害你了。", 
-//         mood: 8, 
-//         love: 12, 
-//         self: -5,
-//         type: optionTypes.PROMISE 
-//     },
-//     { 
-//         text: "我保证以后会多花时间陪你，把你放在第一位。", 
-//         mood: 12, 
-//         love: 15, 
-//         self: -8,
-//         type: optionTypes.PROMISE 
-//     },
-//     { 
-//         text: "我会改变，真的。从今天开始，我会更关心你的感受。", 
-//         mood: 10, 
-//         love: 12, 
-//         self: -5,
-//         type: optionTypes.PROMISE 
-//     },
-    
-//     // 转移注意力选项
-//     { 
-//         text: "给你看我珍藏的搞笑视频，保证让你笑。", 
-//         mood: 8, 
-//         love: 5, 
-//         self: 3,
-//         type: optionTypes.DISTRACTION 
-//     },
-//     { 
-//         text: "我给你跳个舞吧！我偷偷练了好久，就等着给你看呢。", 
-//         mood: 15, 
-//         love: 18, 
-//         self: -8,
-//         type: optionTypes.DISTRACTION 
-//     },
-//     { 
-//         text: "魔魔，让我给你挠挠痒痒吧，知道你最喜欢这个了。", 
-//         mood: 18, 
-//         love: 20, 
-//         self: -5,
-//         type: optionTypes.DISTRACTION 
-//     },
-    
-//     // 解释工作忙的选项
-//     { 
-//         text: "对不起魔魔，我这几天work太忙了，没有照顾好你的感受。", 
-//         mood: 15, 
-//         love: 18, 
-//         self: -5,
-//         type: optionTypes.SELF_EXPLANATION 
-//     },
-//     { 
-//         text: "我这段时间work太忙了，不应该把情绪带给你，我很抱歉。", 
-//         mood: 12, 
-//         love: 15, 
-//         self: -8,
-//         type: optionTypes.SELF_EXPLANATION 
-//     },
-//     { 
-//         text: "我知道我最近太忙了，没有陪你，让你感到被忽视了，对不起。", 
-//         mood: 15, 
-//         love: 20, 
-//         self: -5,
-//         type: optionTypes.SELF_EXPLANATION 
-//     },
-    
-//     // 负面选项
-//     { 
-//         text: "你先冷静一下，等你气消了我们再谈吧。", 
-//         mood: -15, 
-//         love: -20, 
-//         self: 5,
-//         type: optionTypes.APOLOGY 
-//     },
-//     { 
-//         text: "我一定是太累了才会那样说话，原谅我好吗？", 
-//         mood: -5, 
-//         love: -5, 
-//         self: 10,
-//         type: optionTypes.SELF_EXPLANATION 
-//     },
-//     { 
-//         text: "要不我们还是保持点距离冷静一下吧。", 
-//         mood: -20, 
-//         love: -15, 
-//         self: 8,
-//         type: optionTypes.QUALITY_TIME 
-//     }
-// ];
+        // // 魔魔的负面和正面话语
+        // const momoNegativePhrases = [
+        //     "不理你了！勾石！",
+        //     "你根本不懂我！",
+        //     "我很生气！",
+        //     "你总是这样！",
+        //     "我恨死你了！",
+        //     "你根本不在乎我！",
+        //     "我感觉你一点都不爱我...",
+        //     "你就知道工作，都不陪我！"
+        // ];
+
+        // const momoPositivePhrases = [
+        //     "棒棒！",
+        //     "真可爱~",
+        //     "赏猫！",
+        //     "你最好了！",
+        //     "勉强原谅你一下下~",
+        //     "嗯...你还算有点良心",
+        //     "好啦好啦，不生气了~",
+        //     "你，爱你哦~"
+        // ];
+
+        // 师姐的负面和正面评语
+        const negativeFeedback = [
+            "这都不会？你确定学过生物吗？",
+            "这么简单的问题都答错，再认真想想！",
+            "不对，这是基础知识，要复习一下了。",
+            "差远了，重新看看教材吧！",
+            "这个答案完全不对，你再想想？",
+            "错误，你是不是没听课？",
+            "不行不行，基础太差了！",
+            "这个都不知道，要加油了！"
+        ];
+
+        const positiveFeedback = [
+            "回答正确，真棒！",
+            "很好，看来你掌握得不错！",
+            "对，就是这样！",
+            "答对了，继续保持！",
+            "非常好，你理解得很透彻！",
+            "正确！你的基础打得很牢固！",
+            "对的，你掌握了要点！",
+            "完全正确，你很有天赋！"
+        ];
 
 
-// 问题池
-const questionPool = [
-    // COIP问题
-    { 
-        question: "在Co-IP实验中，为什么需要使用抗体？", 
-        answers: [
-            { text: "抗体可以特异性结合目标蛋白，用于沉淀蛋白质复合物", isCorrect: true },
-            { text: "抗体可以阻断非特异性结合，减少背景信号", isCorrect: false },
-            { text: "抗体可以降解RNA，防止RNA干扰实验结果", isCorrect: false },
-            { text: "抗体可以增强蛋白质表达，提高检测灵敏度", isCorrect: false }
-        ],
-        type: questionTypes.COIP 
-    },
-    { 
-        question: "Co-IP实验中，洗涤步骤的主要目的是什么？", 
-        answers: [
-            { text: "去除非特异性结合的蛋白质", isCorrect: true },
-            { text: "活化抗体结合位点", isCorrect: false },
-            { text: "打断蛋白质之间的相互作用", isCorrect: false },
-            { text: "提高蛋白质的溶解度", isCorrect: false }
-        ],
-        type: questionTypes.COIP 
-    },
-    { 
-        question: "在Co-IP实验中，什么因素可能导致假阴性结果？", 
-        answers: [
-            { text: "相互作用蛋白的表达量太低", isCorrect: true },
-            { text: "使用了过多的抗体", isCorrect: false },
-            { text: "缓冲液pH值过高", isCorrect: false },
-            { text: "样品处理时间过长", isCorrect: false }
-        ],
-        type: questionTypes.COIP 
-    },
-    
-    // Western Blot问题
-    { 
-        question: "Western Blot实验中，蛋白质转移到膜上的驱动力是什么？", 
-        answers: [
-            { text: "电场力", isCorrect: true },
-            { text: "渗透压", isCorrect: false },
-            { text: "离心力", isCorrect: false },
-            { text: "表面张力", isCorrect: false }
-        ],
-        type: questionTypes.WB 
-    },
-    { 
-        question: "Western Blot中，封闭步骤的主要目的是什么？", 
-        answers: [
-            { text: "阻止抗体非特异性结合到膜上", isCorrect: true },
-            { text: "增强蛋白质与膜的结合", isCorrect: false },
-            { text: "去除多余的SDS", isCorrect: false },
-            { text: "固定蛋白质在膜上的位置", isCorrect: false }
-        ],
-        type: questionTypes.WB 
-    },
-    { 
-        question: "Western Blot检测中常用的显色底物不包括：", 
-        answers: [
-            { text: "DNA聚合酶", isCorrect: true },
-            { text: "ECL试剂", isCorrect: false },
-            { text: "NBT/BCIP", isCorrect: false },
-            { text: "DAB", isCorrect: false }
-        ],
-        type: questionTypes.WB 
-    },
-    
-    // 蛋白纯化问题
-    { 
-        question: "以下哪种方法不适用于蛋白质的初步纯化？", 
-        answers: [
-            { text: "质谱分析", isCorrect: true },
-            { text: "盐析法", isCorrect: false },
-            { text: "离子交换色谱", isCorrect: false },
-            { text: "分子筛色谱", isCorrect: false }
-        ],
-        type: questionTypes.PROTEIN 
-    },
-    { 
-        question: "亲和色谱法纯化蛋白质的原理是基于：", 
-        answers: [
-            { text: "蛋白质与配体之间的特异性相互作用", isCorrect: true },
-            { text: "蛋白质分子量的差异", isCorrect: false },
-            { text: "蛋白质等电点的差异", isCorrect: false },
-            { text: "蛋白质疏水性的差异", isCorrect: false }
-        ],
-        type: questionTypes.PROTEIN 
-    },
-    { 
-        question: "在His-tag蛋白纯化中，常用什么物质洗脱目标蛋白？", 
-        answers: [
-            { text: "咪唑（Imidazole）", isCorrect: true },
-            { text: "氯化钠（NaCl）", isCorrect: false },
-            { text: "尿素（Urea）", isCorrect: false },
-            { text: "甘氨酸（Glycine）", isCorrect: false }
-        ],
-        type: questionTypes.PROTEIN 
-    },
-    
-    // 分子克隆问题
-    { 
-        question: "在构建重组质粒时，连接酶的主要功能是：", 
-        answers: [
-            { text: "在DNA片段之间形成磷酸二酯键", isCorrect: true },
-            { text: "切割DNA特定位点", isCorrect: false },
-            { text: "解旋DNA双链", isCorrect: false },
-            { text: "合成新的DNA链", isCorrect: false }
-        ],
-        type: questionTypes.CLONING 
-    },
-    { 
-        question: "以下哪种酶不常用于分子克隆？", 
-        answers: [
-            { text: "RNA聚合酶II", isCorrect: true },
-            { text: "限制性内切酶", isCorrect: false },
-            { text: "DNA连接酶", isCorrect: false },
-            { text: "碱性磷酸酶", isCorrect: false }
-        ],
-        type: questionTypes.CLONING 
-    },
-    { 
-        question: "Gateway克隆技术的原理基于：", 
-        answers: [
-            { text: "位点特异性重组", isCorrect: true },
-            { text: "同源重组", isCorrect: false },
-            { text: "限制性酶切和连接", isCorrect: false },
-            { text: "PCR扩增", isCorrect: false }
-        ],
-        type: questionTypes.CLONING 
-    },
-    
-    // PCR技术问题
-    { 
-        question: "Real-time PCR中，SYBR Green的作用是：", 
-        answers: [
-            { text: "与双链DNA结合发出荧光", isCorrect: true },
-            { text: "增加PCR反应的特异性", isCorrect: false },
-            { text: "降低PCR反应的温度", isCorrect: false },
-            { text: "延长引物的长度", isCorrect: false }
-        ],
-        type: questionTypes.PCR 
-    },
-    { 
-        question: "PCR反应中，退火温度主要取决于：", 
-        answers: [
-            { text: "引物的长度和GC含量", isCorrect: true },
-            { text: "模板DNA的长度", isCorrect: false },
-            { text: "dNTP的浓度", isCorrect: false },
-            { text: "Taq酶的活性", isCorrect: false }
-        ],
-        type: questionTypes.PCR 
-    },
-    { 
-        question: "以下哪种PCR技术不用于基因表达分析？", 
-        answers: [
-            { text: "巢式PCR（Nested PCR）", isCorrect: true },
-            { text: "实时定量PCR（Real-time PCR）", isCorrect: false },
-            { text: "反转录PCR（RT-PCR）", isCorrect: false },
-            { text: "数字PCR（Digital PCR）", isCorrect: false }
-        ],
-        type: questionTypes.PCR 
-    },
-    
-    // 凝胶电泳问题
-    { 
-        question: "在DNA琼脂糖凝胶电泳中，DNA迁移速率主要取决于：", 
-        answers: [
-            { text: "DNA片段的大小", isCorrect: true },
-            { text: "DNA的碱基组成", isCorrect: false },
-            { text: "DNA的甲基化程度", isCorrect: false },
-            { text: "DNA的二级结构", isCorrect: false }
-        ],
-        type: questionTypes.GEL 
-    },
-    { 
-        question: "SDS-PAGE中SDS的主要作用是：", 
-        answers: [
-            { text: "使蛋白质变性并赋予统一的负电荷", isCorrect: true },
-            { text: "增加凝胶的强度", isCorrect: false },
-            { text: "提高蛋白质的可溶性", isCorrect: false },
-            { text: "作为染色剂显示蛋白质条带", isCorrect: false }
-        ],
-        type: questionTypes.GEL 
-    },
-    { 
-        question: "以下哪种染料不用于蛋白质凝胶染色？", 
-        answers: [
-            { text: "溴化乙锭（EB）", isCorrect: true },
-            { text: "考马斯亮蓝（Coomassie Blue）", isCorrect: false },
-            { text: "银染（Silver stain）", isCorrect: false },
-            { text: "荧光染料（SYPRO Ruby）", isCorrect: false }
-        ],
-        type: questionTypes.GEL 
-    },
-    
-    // 细胞培养问题
-    { 
-        question: "在哺乳动物细胞培养中，胰蛋白酶的主要作用是：", 
-        answers: [
-            { text: "消化细胞外基质蛋白，使细胞从培养皿上脱离", isCorrect: true },
-            { text: "杀死细菌，防止培养污染", isCorrect: false },
-            { text: "促进细胞生长和分裂", isCorrect: false },
-            { text: "增加培养基的营养成分", isCorrect: false }
-        ],
-        type: questionTypes.CELL 
-    },
-    { 
-        question: "细胞冻存过程中，常用的冷冻保护剂是：", 
-        answers: [
-            { text: "DMSO（二甲基亚砜）", isCorrect: true },
-            { text: "甲醛", isCorrect: false },
-            { text: "乙醇", isCorrect: false },
-            { text: "甘油", isCorrect: false }
-        ],
-        type: questionTypes.CELL 
-    },
-    { 
-        question: "转染是指：", 
-        answers: [
-            { text: "将外源DNA/RNA导入真核细胞", isCorrect: true },
-            { text: "将病毒感染细胞", isCorrect: false },
-            { text: "细胞分化成另一种细胞类型", isCorrect: false },
-            { text: "细胞从一个培养皿转移到另一个培养皿", isCorrect: false }
-        ],
-        type: questionTypes.CELL 
-    }
-];
+        // 随机事件
+        const randomEventsData = [
+            {
+                title: "突发问题",
+                desc: "师姐突然想起一个难题要考你！",
+                scoreEffect: -15,
+                correctEffect: -10
+            },
+            {
+                title: "实验室紧急情况",
+                desc: "实验室的离心机出了故障，分散了你的注意力！",
+                scoreEffect: -10,
+                correctEffect: -15
+            },
+            {
+                title: "思路混乱",
+                desc: "你突然发现自己的笔记混乱了，知识点全搞混了...",
+                scoreEffect: -20,
+                correctEffect: -5
+            },
+            {
+                title: "疲劳影响",
+                desc: "连续实验让你太疲劳，思维变得迟钝！",
+                scoreEffect: -15,
+                correctEffect: -15
+            },
+            {
+                title: "知识漏洞",
+                desc: "你发现有一章内容完全没复习...",
+                scoreEffect: -5,
+                correctEffect: -20
+            }
+        ];
+
+        // // 选项池
+        // const optionPool = [
+        //     // 道歉类选项
+        //     { 
+        //         text: "对不起，魔魔，我不应该说那些话伤害你的感受。", 
+        //         mood: 12, 
+        //         love: 10, 
+        //         self: -5,
+        //         type: optionTypes.APOLOGY 
+        //     },
+        //     { 
+        //         text: "魔魔，我真的很抱歉，我说话不经思考，伤害了你。", 
+        //         mood: 15, 
+        //         love: 12, 
+        //         self: -8,
+        //         type: optionTypes.APOLOGY 
+        //     },
+        //     { 
+        //         text: "我错了，那些话我不该说，伤害了你我很后悔。", 
+        //         mood: 10, 
+        //         love: 8, 
+        //         self: -10,
+        //         type: optionTypes.APOLOGY 
+        //     },
+
+        //     // 礼物类选项
+        //     { 
+        //         text: "我给你买了你最喜欢的奶茶，加了两份珍珠。", 
+        //         mood: 8, 
+        //         love: 12, 
+        //         self: -8,
+        //         type: optionTypes.GIFT 
+        //     },
+        //     { 
+        //         text: "看，我偷偷给你准备了这个小礼物，希望你会喜欢。", 
+        //         mood: 10, 
+        //         love: 15, 
+        //         self: -10,
+        //         type: optionTypes.GIFT 
+        //     },
+        //     { 
+        //         text: "给魔魔买了你最爱吃的肉肉，现在就去做给你吃！", 
+        //         mood: 12, 
+        //         love: 18, 
+        //         self: -8,
+        //         type: optionTypes.GIFT 
+        //     },
+
+        //     // 肢体接触类选项
+        //     { 
+        //         text: "过来，亲亲魔魔~", 
+        //         mood: 15, 
+        //         love: 18, 
+        //         self: -5,
+        //         type: optionTypes.PHYSICAL 
+        //     },
+        //     { 
+        //         text: "要不要抱抱？我知道抱抱可以让你舒服一点。", 
+        //         mood: 12, 
+        //         love: 15, 
+        //         self: -3,
+        //         type: optionTypes.PHYSICAL 
+        //     },
+        //     { 
+        //         text: "来，举高高！", 
+        //         mood: 18, 
+        //         love: 15, 
+        //         self: -8,
+        //         type: optionTypes.PHYSICAL 
+        //     },
+
+        //     // 高质量陪伴选项
+        //     { 
+        //         text: "我们一起去吃你最喜欢的那家火锅吧？我知道你想去很久了。", 
+        //         mood: 10, 
+        //         love: 12, 
+        //         self: -3,
+        //         type: optionTypes.QUALITY_TIME 
+        //     },
+        //     { 
+        //         text: "要不我们一起出去散散步？散步时我可以听你说说心里的想法。", 
+        //         mood: 12, 
+        //         love: 15, 
+        //         self: 0,
+        //         type: optionTypes.QUALITY_TIME 
+        //     },
+        //     { 
+        //         text: "魔魔，我们一起看个电影放松一下吧。你挑你喜欢的！", 
+        //         mood: 8, 
+        //         love: 10, 
+        //         self: 0,
+        //         type: optionTypes.QUALITY_TIME 
+        //     },
+
+        //     // 承诺类选项
+        //     { 
+        //         text: "我以后会更注意自己的言行，不会再这样伤害你了。", 
+        //         mood: 8, 
+        //         love: 12, 
+        //         self: -5,
+        //         type: optionTypes.PROMISE 
+        //     },
+        //     { 
+        //         text: "我保证以后会多花时间陪你，把你放在第一位。", 
+        //         mood: 12, 
+        //         love: 15, 
+        //         self: -8,
+        //         type: optionTypes.PROMISE 
+        //     },
+        //     { 
+        //         text: "我会改变，真的。从今天开始，我会更关心你的感受。", 
+        //         mood: 10, 
+        //         love: 12, 
+        //         self: -5,
+        //         type: optionTypes.PROMISE 
+        //     },
+
+        //     // 转移注意力选项
+        //     { 
+        //         text: "给你看我珍藏的搞笑视频，保证让你笑。", 
+        //         mood: 8, 
+        //         love: 5, 
+        //         self: 3,
+        //         type: optionTypes.DISTRACTION 
+        //     },
+        //     { 
+        //         text: "我给你跳个舞吧！我偷偷练了好久，就等着给你看呢。", 
+        //         mood: 15, 
+        //         love: 18, 
+        //         self: -8,
+        //         type: optionTypes.DISTRACTION 
+        //     },
+        //     { 
+        //         text: "魔魔，让我给你挠挠痒痒吧，知道你最喜欢这个了。", 
+        //         mood: 18, 
+        //         love: 20, 
+        //         self: -5,
+        //         type: optionTypes.DISTRACTION 
+        //     },
+
+        //     // 解释工作忙的选项
+        //     { 
+        //         text: "对不起魔魔，我这几天work太忙了，没有照顾好你的感受。", 
+        //         mood: 15, 
+        //         love: 18, 
+        //         self: -5,
+        //         type: optionTypes.SELF_EXPLANATION 
+        //     },
+        //     { 
+        //         text: "我这段时间work太忙了，不应该把情绪带给你，我很抱歉。", 
+        //         mood: 12, 
+        //         love: 15, 
+        //         self: -8,
+        //         type: optionTypes.SELF_EXPLANATION 
+        //     },
+        //     { 
+        //         text: "我知道我最近太忙了，没有陪你，让你感到被忽视了，对不起。", 
+        //         mood: 15, 
+        //         love: 20, 
+        //         self: -5,
+        //         type: optionTypes.SELF_EXPLANATION 
+        //     },
+
+        //     // 负面选项
+        //     { 
+        //         text: "你先冷静一下，等你气消了我们再谈吧。", 
+        //         mood: -15, 
+        //         love: -20, 
+        //         self: 5,
+        //         type: optionTypes.APOLOGY 
+        //     },
+        //     { 
+        //         text: "我一定是太累了才会那样说话，原谅我好吗？", 
+        //         mood: -5, 
+        //         love: -5, 
+        //         self: 10,
+        //         type: optionTypes.SELF_EXPLANATION 
+        //     },
+        //     { 
+        //         text: "要不我们还是保持点距离冷静一下吧。", 
+        //         mood: -20, 
+        //         love: -15, 
+        //         self: 8,
+        //         type: optionTypes.QUALITY_TIME 
+        //     }
+        // ];
 
 
-// // 魔魔反馈信息
-// const momoFeedbacks = [
-//     { min: 0, max: 20, text: "魔魔非常生气，她说再也不想理你了！", emoji: "😡", phrase: momoNegativePhrases[0] },
-//     { min: 21, max: 40, text: "魔魔还在生气中，但偶尔会瞥你一眼...", emoji: "😠", phrase: momoNegativePhrases[1] },
-//     { min: 41, max: 60, text: "魔魔的表情缓和了一些，但还是不太高兴", emoji: "😒", phrase: momoNegativePhrases[2] },
-//     { min: 61, max: 80, text: "魔魔似乎消气了一点，开始愿意听你说话", emoji: "😐", phrase: momoPositivePhrases[4] },
-//     { min: 81, max: 89, text: "魔魔已经不再生气，嘴角微微上扬", emoji: "😊", phrase: momoPositivePhrases[1] },
-//     { min: 90, max: 100, text: "魔魔完全开心了，笑着向你靠近！", emoji: "😍", phrase: momoPositivePhrases[0] }
-// ];
+        // 问题池
+        const questionPool = [
+            // COIP问题
+            {
+                question: "在Co-IP实验中，为什么需要使用抗体？",
+                answers: [
+                    { text: "抗体可以特异性结合目标蛋白，用于沉淀蛋白质复合物", isCorrect: true },
+                    { text: "抗体可以阻断非特异性结合，减少背景信号", isCorrect: false },
+                    { text: "抗体可以降解RNA，防止RNA干扰实验结果", isCorrect: false },
+                    { text: "抗体可以增强蛋白质表达，提高检测灵敏度", isCorrect: false }
+                ],
+                type: questionTypes.COIP
+            },
+            {
+                question: "Co-IP实验中，洗涤步骤的主要目的是什么？",
+                answers: [
+                    { text: "去除非特异性结合的蛋白质", isCorrect: true },
+                    { text: "活化抗体结合位点", isCorrect: false },
+                    { text: "打断蛋白质之间的相互作用", isCorrect: false },
+                    { text: "提高蛋白质的溶解度", isCorrect: false }
+                ],
+                type: questionTypes.COIP
+            },
+            {
+                question: "在Co-IP实验中，什么因素可能导致假阴性结果？",
+                answers: [
+                    { text: "相互作用蛋白的表达量太低", isCorrect: true },
+                    { text: "使用了过多的抗体", isCorrect: false },
+                    { text: "缓冲液pH值过高", isCorrect: false },
+                    { text: "样品处理时间过长", isCorrect: false }
+                ],
+                type: questionTypes.COIP
+            },
+
+            // Western Blot问题
+            {
+                question: "Western Blot实验中，蛋白质转移到膜上的驱动力是什么？",
+                answers: [
+                    { text: "电场力", isCorrect: true },
+                    { text: "渗透压", isCorrect: false },
+                    { text: "离心力", isCorrect: false },
+                    { text: "表面张力", isCorrect: false }
+                ],
+                type: questionTypes.WB
+            },
+            {
+                question: "Western Blot中，封闭步骤的主要目的是什么？",
+                answers: [
+                    { text: "阻止抗体非特异性结合到膜上", isCorrect: true },
+                    { text: "增强蛋白质与膜的结合", isCorrect: false },
+                    { text: "去除多余的SDS", isCorrect: false },
+                    { text: "固定蛋白质在膜上的位置", isCorrect: false }
+                ],
+                type: questionTypes.WB
+            },
+            {
+                question: "Western Blot检测中常用的显色底物不包括：",
+                answers: [
+                    { text: "DNA聚合酶", isCorrect: true },
+                    { text: "ECL试剂", isCorrect: false },
+                    { text: "NBT/BCIP", isCorrect: false },
+                    { text: "DAB", isCorrect: false }
+                ],
+                type: questionTypes.WB
+            },
+
+            // 蛋白纯化问题
+            {
+                question: "以下哪种方法不适用于蛋白质的初步纯化？",
+                answers: [
+                    { text: "质谱分析", isCorrect: true },
+                    { text: "盐析法", isCorrect: false },
+                    { text: "离子交换色谱", isCorrect: false },
+                    { text: "分子筛色谱", isCorrect: false }
+                ],
+                type: questionTypes.PROTEIN
+            },
+            {
+                question: "亲和色谱法纯化蛋白质的原理是基于：",
+                answers: [
+                    { text: "蛋白质与配体之间的特异性相互作用", isCorrect: true },
+                    { text: "蛋白质分子量的差异", isCorrect: false },
+                    { text: "蛋白质等电点的差异", isCorrect: false },
+                    { text: "蛋白质疏水性的差异", isCorrect: false }
+                ],
+                type: questionTypes.PROTEIN
+            },
+            {
+                question: "在His-tag蛋白纯化中，常用什么物质洗脱目标蛋白？",
+                answers: [
+                    { text: "咪唑（Imidazole）", isCorrect: true },
+                    { text: "氯化钠（NaCl）", isCorrect: false },
+                    { text: "尿素（Urea）", isCorrect: false },
+                    { text: "甘氨酸（Glycine）", isCorrect: false }
+                ],
+                type: questionTypes.PROTEIN
+            },
+
+            // 分子克隆问题
+            {
+                question: "在构建重组质粒时，连接酶的主要功能是：",
+                answers: [
+                    { text: "在DNA片段之间形成磷酸二酯键", isCorrect: true },
+                    { text: "切割DNA特定位点", isCorrect: false },
+                    { text: "解旋DNA双链", isCorrect: false },
+                    { text: "合成新的DNA链", isCorrect: false }
+                ],
+                type: questionTypes.CLONING
+            },
+            {
+                question: "以下哪种酶不常用于分子克隆？",
+                answers: [
+                    { text: "RNA聚合酶II", isCorrect: true },
+                    { text: "限制性内切酶", isCorrect: false },
+                    { text: "DNA连接酶", isCorrect: false },
+                    { text: "碱性磷酸酶", isCorrect: false }
+                ],
+                type: questionTypes.CLONING
+            },
+            {
+                question: "Gateway克隆技术的原理基于：",
+                answers: [
+                    { text: "位点特异性重组", isCorrect: true },
+                    { text: "同源重组", isCorrect: false },
+                    { text: "限制性酶切和连接", isCorrect: false },
+                    { text: "PCR扩增", isCorrect: false }
+                ],
+                type: questionTypes.CLONING
+            },
+
+            // PCR技术问题
+            {
+                question: "Real-time PCR中，SYBR Green的作用是：",
+                answers: [
+                    { text: "与双链DNA结合发出荧光", isCorrect: true },
+                    { text: "增加PCR反应的特异性", isCorrect: false },
+                    { text: "降低PCR反应的温度", isCorrect: false },
+                    { text: "延长引物的长度", isCorrect: false }
+                ],
+                type: questionTypes.PCR
+            },
+            {
+                question: "PCR反应中，退火温度主要取决于：",
+                answers: [
+                    { text: "引物的长度和GC含量", isCorrect: true },
+                    { text: "模板DNA的长度", isCorrect: false },
+                    { text: "dNTP的浓度", isCorrect: false },
+                    { text: "Taq酶的活性", isCorrect: false }
+                ],
+                type: questionTypes.PCR
+            },
+            {
+                question: "以下哪种PCR技术不用于基因表达分析？",
+                answers: [
+                    { text: "巢式PCR（Nested PCR）", isCorrect: true },
+                    { text: "实时定量PCR（Real-time PCR）", isCorrect: false },
+                    { text: "反转录PCR（RT-PCR）", isCorrect: false },
+                    { text: "数字PCR（Digital PCR）", isCorrect: false }
+                ],
+                type: questionTypes.PCR
+            },
+
+            // 凝胶电泳问题
+            {
+                question: "在DNA琼脂糖凝胶电泳中，DNA迁移速率主要取决于：",
+                answers: [
+                    { text: "DNA片段的大小", isCorrect: true },
+                    { text: "DNA的碱基组成", isCorrect: false },
+                    { text: "DNA的甲基化程度", isCorrect: false },
+                    { text: "DNA的二级结构", isCorrect: false }
+                ],
+                type: questionTypes.GEL
+            },
+            {
+                question: "SDS-PAGE中SDS的主要作用是：",
+                answers: [
+                    { text: "使蛋白质变性并赋予统一的负电荷", isCorrect: true },
+                    { text: "增加凝胶的强度", isCorrect: false },
+                    { text: "提高蛋白质的可溶性", isCorrect: false },
+                    { text: "作为染色剂显示蛋白质条带", isCorrect: false }
+                ],
+                type: questionTypes.GEL
+            },
+            {
+                question: "以下哪种染料不用于蛋白质凝胶染色？",
+                answers: [
+                    { text: "溴化乙锭（EB）", isCorrect: true },
+                    { text: "考马斯亮蓝（Coomassie Blue）", isCorrect: false },
+                    { text: "银染（Silver stain）", isCorrect: false },
+                    { text: "荧光染料（SYPRO Ruby）", isCorrect: false }
+                ],
+                type: questionTypes.GEL
+            },
+
+            // 细胞培养问题
+            {
+                question: "在哺乳动物细胞培养中，胰蛋白酶的主要作用是：",
+                answers: [
+                    { text: "消化细胞外基质蛋白，使细胞从培养皿上脱离", isCorrect: true },
+                    { text: "杀死细菌，防止培养污染", isCorrect: false },
+                    { text: "促进细胞生长和分裂", isCorrect: false },
+                    { text: "增加培养基的营养成分", isCorrect: false }
+                ],
+                type: questionTypes.CELL
+            },
+            {
+                question: "细胞冻存过程中，常用的冷冻保护剂是：",
+                answers: [
+                    { text: "DMSO（二甲基亚砜）", isCorrect: true },
+                    { text: "甲醛", isCorrect: false },
+                    { text: "乙醇", isCorrect: false },
+                    { text: "甘油", isCorrect: false }
+                ],
+                type: questionTypes.CELL
+            },
+            {
+                question: "转染是指：",
+                answers: [
+                    { text: "将外源DNA/RNA导入真核细胞", isCorrect: true },
+                    { text: "将病毒感染细胞", isCorrect: false },
+                    { text: "细胞分化成另一种细胞类型", isCorrect: false },
+                    { text: "细胞从一个培养皿转移到另一个培养皿", isCorrect: false }
+                ],
+                type: questionTypes.CELL
+            }
+        ];
 
 
-// 得分反馈信息
-const scoreFeedbacks = [
-    { min: 0, max: 20, text: "很遗憾，你的得分很低，需要好好复习了！", emoji: "😱", phrase: negativeFeedback[0] },
-    { min: 21, max: 40, text: "得分较低，基础知识还需要加强！", emoji: "😔", phrase: negativeFeedback[1] },
-    { min: 41, max: 60, text: "及格了，但还有很大提升空间！", emoji: "😐", phrase: negativeFeedback[2] },
-    { min: 61, max: 80, text: "不错的得分，继续努力！", emoji: "🙂", phrase: positiveFeedback[4] },
-    { min: 81, max: 89, text: "很好的成绩，基础知识掌握得不错！", emoji: "😊", phrase: positiveFeedback[1] },
-    { min: 90, max: 100, text: "优秀！你对这些知识点掌握得非常好！", emoji: "🎉", phrase: positiveFeedback[0] }
-];
-
-// DOM元素
-const startScreen = document.getElementById('start-screen');
-const mainGameScreen = document.getElementById('main-game-screen');
-const resultScreen = document.getElementById('result-screen');
-const startGameBtn = document.getElementById('start-game-btn');
-const restartGameBtn = document.getElementById('restart-game-btn');
-const momoMoodBar = document.getElementById('momo-mood-bar');
-const momoMoodValue = document.getElementById('momo-mood-value');
-const momoMoodEmoji = document.getElementById('momo-mood-emoji');
-const momoLoveBar = document.getElementById('momo-love-bar');
-const momoLoveValue = document.getElementById('momo-love-value');
-const momoLoveEmoji = document.getElementById('momo-love-emoji');
-const momoQuote = document.getElementById('momo-quote');
-const optionsContainer = document.getElementById('options-container');
-const sceneDescription = document.getElementById('scene-description');
-const roundCounter = document.getElementById('round-counter');
-const timerBar = document.getElementById('timer-bar');
-const timerText = document.getElementById('timer-text');
-const eventNotification = document.getElementById('event-notification');
-const eventTitle = document.getElementById('event-title');
-const eventDesc = document.getElementById('event-desc');
+        // // 魔魔反馈信息
+        // const momoFeedbacks = [
+        //     { min: 0, max: 20, text: "魔魔非常生气，她说再也不想理你了！", emoji: "😡", phrase: momoNegativePhrases[0] },
+        //     { min: 21, max: 40, text: "魔魔还在生气中，但偶尔会瞥你一眼...", emoji: "😠", phrase: momoNegativePhrases[1] },
+        //     { min: 41, max: 60, text: "魔魔的表情缓和了一些，但还是不太高兴", emoji: "😒", phrase: momoNegativePhrases[2] },
+        //     { min: 61, max: 80, text: "魔魔似乎消气了一点，开始愿意听你说话", emoji: "😐", phrase: momoPositivePhrases[4] },
+        //     { min: 81, max: 89, text: "魔魔已经不再生气，嘴角微微上扬", emoji: "😊", phrase: momoPositivePhrases[1] },
+        //     { min: 90, max: 100, text: "魔魔完全开心了，笑着向你靠近！", emoji: "😍", phrase: momoPositivePhrases[0] }
+        // ];
 
 
-// 结果界面元素
-const resultTitle = document.getElementById('result-title');
-const resultDesc = document.getElementById('result-desc');
-const resultBorder = document.getElementById('result-border');
-const finalMomoMood = document.getElementById('final-momo-mood');
-const finalMomoLove = document.getElementById('final-momo-love');
-const finalMomoEmoji = document.getElementById('final-momo-emoji');
-const finalLoveEmoji = document.getElementById('final-love-emoji');
-const totalActions = document.getElementById('total-actions');
-const randomEventsElement = document.getElementById('random-events');
-const timeoutCount = document.getElementById('timeout-count');
+        // 得分反馈信息
+        const scoreFeedbacks = [
+            { min: 0, max: 20, text: "很遗憾，你的得分很低，需要好好复习了！", emoji: "😱", phrase: negativeFeedback[0] },
+            { min: 21, max: 40, text: "得分较低，基础知识还需要加强！", emoji: "😔", phrase: negativeFeedback[1] },
+            { min: 41, max: 60, text: "及格了，但还有很大提升空间！", emoji: "😐", phrase: negativeFeedback[2] },
+            { min: 61, max: 80, text: "不错的得分，继续努力！", emoji: "🙂", phrase: positiveFeedback[4] },
+            { min: 81, max: 89, text: "很好的成绩，基础知识掌握得不错！", emoji: "😊", phrase: positiveFeedback[1] },
+            { min: 90, max: 100, text: "优秀！你对这些知识点掌握得非常好！", emoji: "🎉", phrase: positiveFeedback[0] }
+        ];
 
-// 计时器相关变量
-let timerInterval;
-let timeLeft;
-
-// 更新页面UI元素文本
-function updateUITexts() {
-    // 修改顶部标题
-    document.querySelector('h1.text-xl').textContent = "实验室模拟器 - 挑战模式";
-    document.querySelector('p.text-gray-500.text-sm').textContent = "分子生物学知识问答";
-    
-    // 修改开始界面文本
-    document.querySelector('#start-screen h2').textContent = "分子生物学知识问答";
-    document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答各种分子生物学问题！";
-    
-    // 修改状态栏标签
-    document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "当前得分";
-    document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "正确率";
-    
-    // 修改按钮文本
-    document.getElementById('start-game-btn').textContent = "开始挑战";
-    document.getElementById('restart-game-btn').textContent = "再次挑战";
-    
-    // 修改游戏规则
-    const rulesItems = document.querySelectorAll('#start-screen .my-4.bg-gray-50 ul.mb-3 li');
-    rulesItems[0].textContent = "• 初始分数为30";
-    rulesItems[1].textContent = "• 胜利条件：得分和正确率需达95+";
-    rulesItems[2].textContent = "• 回合数只有10轮";
-    rulesItems[3].textContent = "• 每轮需回答不同类型的分子生物学问题";
-    rulesItems[4].textContent = "• 随机事件会突然降低分数";
-    rulesItems[5].textContent = "• 时间压力：每轮回答限时30秒";
-    rulesItems[6].textContent = "• 得分低于40时，回答正确的加分效果减半";
-    
-    // 修改结果界面标签
-    document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "最终得分：";
-    document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "正确率：";
-}
-
-// 更新状态栏
-function updateStatusBars() {
-    momoMoodBar.style.width = `${gameState.score}%`;
-    momoMoodValue.textContent = gameState.score;
-    
-    momoLoveBar.style.width = `${gameState.correctAnswers}%`;
-    momoLoveValue.textContent = gameState.correctAnswers;
-    
-    // 根据得分更新状态栏颜色和表情
-    updateBarColors();
-    
-    // 更新师姐的反馈
-    updateFeedback();
-}
+        // DOM元素
+        const startScreen = document.getElementById('start-screen');
+        const mainGameScreen = document.getElementById('main-game-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const restartGameBtn = document.getElementById('restart-game-btn');
+        const momoMoodBar = document.getElementById('momo-mood-bar');
+        const momoMoodValue = document.getElementById('momo-mood-value');
+        const momoMoodEmoji = document.getElementById('momo-mood-emoji');
+        const momoLoveBar = document.getElementById('momo-love-bar');
+        const momoLoveValue = document.getElementById('momo-love-value');
+        const momoLoveEmoji = document.getElementById('momo-love-emoji');
+        const momoQuote = document.getElementById('momo-quote');
+        const optionsContainer = document.getElementById('options-container');
+        const sceneDescription = document.getElementById('scene-description');
+        const roundCounter = document.getElementById('round-counter');
+        const timerBar = document.getElementById('timer-bar');
+        const timerText = document.getElementById('timer-text');
+        const eventNotification = document.getElementById('event-notification');
+        const eventTitle = document.getElementById('event-title');
+        const eventDesc = document.getElementById('event-desc');
 
 
-// 更新状态栏颜色和表情
-function updateBarColors() {
-    // 得分颜色和表情
-    if (gameState.score < 30) {
-        momoMoodBar.className = "progress-fill bg-red-500";
-        momoMoodEmoji.textContent = "😱";
-    } else if (gameState.score < 60) {
-        momoMoodBar.className = "progress-fill bg-orange-400";
-        momoMoodEmoji.textContent = "😔";
-    } else if (gameState.score < 80) {
-        momoMoodBar.className = "progress-fill bg-yellow-400";
-        momoMoodEmoji.textContent = "🙂";
-    } else if (gameState.score < 95) {
-        momoMoodBar.className = "progress-fill bg-green-400";
-        momoMoodEmoji.textContent = "😊";
-    } else {
-        momoMoodBar.className = "progress-fill bg-green-500";
-        momoMoodEmoji.textContent = "🎉";
-    }
+        // 结果界面元素
+        const resultTitle = document.getElementById('result-title');
+        const resultDesc = document.getElementById('result-desc');
+        const resultBorder = document.getElementById('result-border');
+        const finalMomoMood = document.getElementById('final-momo-mood');
+        const finalMomoLove = document.getElementById('final-momo-love');
+        const finalMomoEmoji = document.getElementById('final-momo-emoji');
+        const finalLoveEmoji = document.getElementById('final-love-emoji');
+        const totalActions = document.getElementById('total-actions');
+        const randomEventsElement = document.getElementById('random-events');
+        const timeoutCount = document.getElementById('timeout-count');
 
-    // 正确率颜色和表情
-    if (gameState.correctAnswers < 30) {
-        momoLoveBar.className = "progress-fill bg-red-500";
-        momoLoveEmoji.textContent = "❌";
-    } else if (gameState.correctAnswers < 60) {
-        momoLoveBar.className = "progress-fill bg-orange-400";
-        momoLoveEmoji.textContent = "⚠️";
-    } else if (gameState.correctAnswers < 80) {
-        momoLoveBar.className = "progress-fill bg-yellow-400";
-        momoLoveEmoji.textContent = "✓";
-    } else if (gameState.correctAnswers < 95) {
-        momoLoveBar.className = "progress-fill bg-green-400";
-        momoLoveEmoji.textContent = "✅";
-    } else {
-        momoLoveBar.className = "progress-fill bg-green-500";
-        momoLoveEmoji.textContent = "🏆";
-    }
-}
+        // 计时器相关变量
+        let timerInterval;
+        let timeLeft;
 
+        // 更新页面UI元素文本
+        function updateUITexts() {
+            // 修改顶部标题
+            // document.querySelector('h1.text-xl').textContent = "实验室模拟器 - 挑战模式";
+            document.querySelector('p.text-gray-500.text-sm').textContent = "分子生物学知识问答";
 
-// 更新师姐的反馈
-function updateFeedback() {
-    // 根据得分获取对应的反馈
-    const feedback = scoreFeedbacks.find(f => gameState.score >= f.min && gameState.score <= f.max);
-    
-    // 更新场景描述
-    sceneDescription.textContent = feedback.text;
-    
-    // 更新师姐的对话
-    if (gameState.score < 40) {
-        // 在得分低时，显示负面评语
-        const randomIndex = Math.floor(Math.random() * negativeFeedback.length);
-        momoQuote.textContent = `"${negativeFeedback[randomIndex]}"`;
-    } else if (gameState.score >= 80) {
-        // 在得分高时，显示正面评语
-        const randomIndex = Math.floor(Math.random() * positiveFeedback.length);
-        momoQuote.textContent = `"${positiveFeedback[randomIndex]}"`;
-    } else {
-        // 在中间状态时，显示反馈中的评语
-        momoQuote.textContent = `"${feedback.phrase}"`;
-    }
-}
+            // 修改开始界面文本
+            document.querySelector('#start-screen h2').textContent = "分子生物学知识问答";
+            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答各种分子生物学问题！";
 
-// 生成问题和选项
-function generateQuestion() {
-    // 清空选项容器
-    optionsContainer.innerHTML = '';
-    
-    // 从问题池中随机选择一个问题
-    const randomIndex = Math.floor(Math.random() * questionPool.length);
-    const selectedQuestion = questionPool[randomIndex];
-    gameState.currentQuestion = selectedQuestion;
-    
-    // 设置问题描述
-    sceneDescription.textContent = selectedQuestion.question;
-    
-    // 打乱选项顺序
-    const shuffledAnswers = [...selectedQuestion.answers];
-    shuffleArray(shuffledAnswers);
-    
-    // 创建选项按钮
-    shuffledAnswers.forEach(answer => {
-        const button = document.createElement('button');
-        button.className = 'option-btn w-full p-3 mb-2 text-left border border-gray-200 rounded hover:bg-blue-50 transition';
-        button.textContent = answer.text;
-        
-        // 添加选项事件
-        button.addEventListener('click', () => {
-            handleAnswerSelect(answer);
-        });
-        
-        optionsContainer.appendChild(button);
-    });
-    
-    // 更新师姐对话为问题提示
-    momoQuote.textContent = `"${selectedQuestion.question}"`;
-}
+            // 修改状态栏标签
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "当前得分";
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "正确率";
 
+            // 修改时间条样式
+            const timerBarElement = document.getElementById('timer-bar');
+            if (timerBarElement) {
+                timerBarElement.style.transition = 'width 0.2s linear, background-color 0.5s';
+                timerBarElement.classList.remove('timer-active'); // 确保移除动画类
+            }
 
-// 处理答案选择
-function handleAnswerSelect(answer) {
-    // 停止计时器
-    clearInterval(timerInterval);
-    timerBar.classList.remove('timer-active');
-    
-    // 计算得分变化
-    let scoreEffect = 0;
-    let correctEffect = 0;
-    
-    if (answer.isCorrect) {
-        // 答对了，增加得分和正确率
-        scoreEffect = 10;
-        correctEffect = 15;
-        
-        // 更新师姐对话为正面评价
-        const randomIndex = Math.floor(Math.random() * positiveFeedback.length);
-        momoQuote.textContent = `"${positiveFeedback[randomIndex]}"`;
-    } else {
-        // 答错了，减少得分和正确率
-        scoreEffect = -15;
-        correctEffect = -10;
-        
-        // 更新师姐对话为负面评价
-        const randomIndex = Math.floor(Math.random() * negativeFeedback.length);
-        momoQuote.textContent = `"${negativeFeedback[randomIndex]}"`;
-    }
-    
-    // 如果得分低于40，效果减半
-    if (gameState.score < 40) {
-        scoreEffect = Math.floor(scoreEffect / 2);
-        correctEffect = Math.floor(correctEffect / 2);
-    }
-    
-    // 更新游戏状态
-    gameState.score = Math.max(0, Math.min(100, gameState.score + scoreEffect));
-    gameState.correctAnswers = Math.max(0, Math.min(100, gameState.correctAnswers + correctEffect));
-    gameState.lastQuestionType = gameState.currentQuestion.type;    
-    // To ensure consistency with any remaining old code:
-    gameState.lastOptionType = gameState.currentQuestion.type;
-    // 更新状态栏
-    updateStatusBars();
-    
-    // 继续游戏
-    continueGame();
-}
+            // 修改按钮文本
+            document.getElementById('start-game-btn').textContent = "开始挑战";
+            document.getElementById('restart-game-btn').textContent = "再次挑战";
 
-// // 处理选项选择
-// function handleOptionSelect(option) {
-//     // 停止计时器
-//     clearInterval(timerInterval);
-//     timerBar.classList.remove('timer-active');
-    
-//     // 计算选项效果
-//     let moodEffect = option.mood;
-//     let loveEffect = option.love;
-    
-//     // 检查是否与当前需求匹配
-//     const isMatchingNeed = option.type === gameState.currentNeed;
-    
-//     // 如果匹配需求，效果提升
-//     if (isMatchingNeed) {
-//         moodEffect = Math.floor(moodEffect * 1.5);
-//         loveEffect = Math.floor(loveEffect * 1.3);
-//     }
-    
-//     // 检查是否重复使用同类型选项
-//     if (gameState.lastOptionType === option.type) {
-//         // 记录重复次数
-//         gameState.repeatedOptions[option.type] = (gameState.repeatedOptions[option.type] || 0) + 1;
-        
-//         // 根据重复次数降低效果
-//         const repeatFactor = Math.max(0.3, 1 - (gameState.repeatedOptions[option.type] * 0.3));
-//         moodEffect = Math.floor(moodEffect * repeatFactor);
-//         loveEffect = Math.floor(loveEffect * repeatFactor);
-//     } else {
-//         // 重置该类型的重复计数
-//         gameState.repeatedOptions[option.type] = 0;
-//     }
-    
-//     // 如果魔魔心情低于40，效果减半
-//     if (gameState.score < 40) {
-//         moodEffect = Math.floor(moodEffect / 2);
-//         loveEffect = Math.floor(loveEffect / 2);
-//     }
-    
-//     // 更新游戏状态
-//     gameState.score = Math.max(0, Math.min(100, gameState.score + moodEffect));
-//     gameState.correctAnswers = Math.max(0, Math.min(100, gameState.correctAnswers + loveEffect));
-//     // gameState.kokoMood = Math.max(0, Math.min(100, gameState.kokoMood + option.self));
-//     gameState.lastOptionType = option.type;
-    
-//     // 更新状态栏
-//     updateStatusBars();
-    
-//     // 继续游戏
-//     continueGame();
-// }
+            // 修改游戏规则
+            const rulesItems = document.querySelectorAll('#start-screen .my-4.bg-gray-50 ul.mb-3 li');
+            rulesItems[0].textContent = "• 初始分数为30";
+            rulesItems[1].textContent = "• 胜利条件：师姐心情或正确率需达95+";
+            rulesItems[2].textContent = "• 回合数只有10轮";
+            rulesItems[3].textContent = "• 每轮需回答不同类型的分子生物学问题";
+            rulesItems[4].textContent = "• 随机事件会突然降低分数";
+            rulesItems[5].textContent = "• 时间压力：每轮回答限时30秒";
+            rulesItems[6].textContent = "• 得分低于40时，回答正确的加分效果减半";
 
-// 继续游戏
-function continueGame() {
-    // 增加回合数
-    gameState.round++;
-    
-    // 更新回合显示
-    roundCounter.textContent = `第${gameState.round}/${gameState.maxRounds}轮`;
-    
-    // 检查游戏是否结束
-    if (gameState.round >= gameState.maxRounds) {
-        endGame();
-        return;
-    }
-    
-    // 可能触发随机事件
-    if (Math.random() < 0.3) { // 30%几率触发随机事件
-        triggerRandomEvent();
-    } else {
-        // 生成新的问题和选项
-        generateQuestion();
-        
-        // 开始新一轮计时
-        startTimer();
-    }
-}
-
-
-// 触发随机事件
-function triggerRandomEvent() {
-    // 选择一个随机事件
-    const randomEvent = randomEventsData[Math.floor(Math.random() * randomEventsData.length)];
-    
-    // 更新事件计数
-    gameState.eventCount++;
-    
-    // 显示事件通知
-    eventTitle.textContent = randomEvent.title;
-    eventDesc.textContent = randomEvent.desc;
-    eventNotification.classList.remove('hidden');
-    eventNotification.classList.add('event-notification');
-    
-    // 应用事件效果
-    gameState.score = Math.max(0, gameState.score + randomEvent.scoreEffect);
-    gameState.correctAnswers = Math.max(0, gameState.correctAnswers + randomEvent.correctEffect);
-    
-    // 更新状态栏
-    updateStatusBars();
-    
-    // 3秒后隐藏通知并继续游戏
-    setTimeout(() => {
-        eventNotification.classList.add('hidden');
-        eventNotification.classList.remove('event-notification');
-        
-        // 生成新的问题和选项
-        generateQuestion();
-        
-        // 开始新一轮计时
-        startTimer();
-    }, 3000);
-}
-
-
-// 生成新的需求
-function generateNewNeed() {
-    // 获取所有需求类型
-    const needTypes = Object.values(optionTypes);
-    
-    // 随机选择一个需求（避免重复）
-    let newNeed;
-    do {
-        newNeed = needTypes[Math.floor(Math.random() * needTypes.length)];
-    } while (newNeed === gameState.currentNeed);
-    
-    gameState.currentNeed = newNeed;
-    
-    // 更新需求显示
-    // currentNeedElement.textContent = needDescriptions[newNeed];
-}
-
-// 开始计时器
-function startTimer() {
-    // 重置计时器
-    timeLeft = gameState.timerDuration;
-    timerText.textContent = `剩余时间: ${timeLeft}秒`;
-    
-    // 重置计时器样式
-    timerBar.style.animationDuration = `${gameState.timerDuration}s`;
-    timerBar.classList.add('timer-active');
-    
-    // 清除之前的计时器
-    if (timerInterval) {
-        clearInterval(timerInterval);
-    }
-    
-    // 启动计时器
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        timerText.textContent = `剩余时间: ${timeLeft}秒`;
-        
-        if (timeLeft <= 0) {
-            // 计时结束
-            clearInterval(timerInterval);
-            handleTimeout();
+            // 修改结果界面标签
+            // Additional UI text updates
+            document.querySelector('.font-bold.text-red-600.mb-1').textContent = "师姐：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "最终得分：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "正确率：";
         }
-    }, 1000);
-}
 
-// 处理超时
-function handleTimeout() {
-    // 增加超时计数
-    gameState.timeoutCount++;
-    
-    // 因为超时没有回答，降低得分和正确率
-    gameState.score = Math.max(0, gameState.score - 10);
-    gameState.correctAnswers = Math.max(0, gameState.correctAnswers - 8);
-    
-    // 更新状态栏
-    updateStatusBars();
-    
-    // 继续游戏
-    continueGame();
-}
+        // 更新状态栏
+        function updateStatusBars() {
+            momoMoodBar.style.width = `${gameState.score}%`;
+            momoMoodValue.textContent = gameState.score;
 
-// 结束游戏
-function endGame() {
-    // 停止计时器
-    if (timerInterval) {
-        clearInterval(timerInterval);
-    }
-    
-    // 隐藏游戏主界面，显示结果界面
-    mainGameScreen.classList.add('hidden');
-    resultScreen.classList.remove('hidden');
-    
-    // 设置最终指标
-    finalMomoMood.textContent = gameState.score;
-    finalMomoLove.textContent = gameState.correctAnswers;
-    
-    // 设置最终表情
-    updateFinalEmojis();
-    
-    // 设置游戏数据
-    totalActions.textContent = gameState.round;
-    randomEventsElement.textContent = gameState.eventCount;
-    timeoutCount.textContent = gameState.timeoutCount;
-    
-    // 判断游戏结果
-    const victory = gameState.score >= 95 && gameState.correctAnswers >= 95;
-    const goodEnding = gameState.score >= 80 && gameState.correctAnswers >= 80;
-    const neutralEnding = gameState.score >= 60 && gameState.correctAnswers >= 60;
-    
-    // 设置结果描述
-    if (victory) {
-        resultTitle.textContent = "完美通关！";
-        resultDesc.textContent = "恭喜你成功完成所有问题！你对实验技术的掌握令人印象深刻！";
-        resultBorder.className = "border-l-4 border-green-500 pl-3 mb-6";
-        document.getElementById('momo-final-quote').textContent = `"太厉害了！你的知识水平非常扎实，我对你刮目相看！"`;
-    } else if (goodEnding) {
-        resultTitle.textContent = "优秀通关！";
-        resultDesc.textContent = "你表现出了扎实的知识基础，只有少数问题没有答对。继续保持！";
-        resultBorder.className = "border-l-4 border-blue-500 pl-3 mb-6";
-        document.getElementById('momo-final-quote').textContent = `"很不错，你对基础知识掌握得相当好！"`;
-    } else if (neutralEnding) {
-        resultTitle.textContent = "基本通关";
-        resultDesc.textContent = "你对基础知识有一定掌握，但还有提升空间。建议继续加强学习！";
-        resultBorder.className = "border-l-4 border-yellow-500 pl-3 mb-6";
-        document.getElementById('momo-final-quote').textContent = `"还不错，但需要更加努力学习这些基础知识。"`;
-    } else {
-        resultTitle.textContent = "挑战失败";
-        resultDesc.textContent = "你对这些实验技术的理解还有所欠缺。建议回去复习基础知识，再来挑战！";
-        resultBorder.className = "border-l-4 border-red-500 pl-3 mb-6";
-        document.getElementById('momo-final-quote').textContent = `"基础知识太薄弱了，需要好好复习一下基本概念。"`;
-    }
-}
+            momoLoveBar.style.width = `${gameState.correctAnswers}%`;
+            momoLoveValue.textContent = gameState.correctAnswers;
 
-// 更新最终结果表情
-function updateFinalEmojis() {
-    // 得分表情
-    if (gameState.score < 30) {
-        finalMomoEmoji.textContent = "😱";
-    } else if (gameState.score < 60) {
-        finalMomoEmoji.textContent = "😔";
-    } else if (gameState.score < 80) {
-        finalMomoEmoji.textContent = "🙂";
-    } else if (gameState.score < 95) {
-        finalMomoEmoji.textContent = "😊";
-    } else {
-        finalMomoEmoji.textContent = "🎉";
-    }
-    
-    // 正确率表情
-    if (gameState.correctAnswers < 30) {
-        finalLoveEmoji.textContent = "❌";
-    } else if (gameState.correctAnswers < 60) {
-        finalLoveEmoji.textContent = "⚠️";
-    } else if (gameState.correctAnswers < 80) {
-        finalLoveEmoji.textContent = "✓";
-    } else if (gameState.correctAnswers < 95) {
-        finalLoveEmoji.textContent = "✅";
-    } else {
-        finalLoveEmoji.textContent = "🏆";
-    }
-}
+            // 根据得分更新状态栏颜色和表情
+            updateBarColors();
 
-// 辅助函数：随机打乱数组
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+            // 更新师姐的反馈
+            updateFeedback();
+        }
 
-// 初始化游戏
-function initGame() {
-    console.log('Game initialization started');
-    
-    // 重置游戏状态
-    gameState.score = 30;
-    gameState.correctAnswers = 30;
-    // gameState.kokoMood = 30;
-    gameState.gameOver = false;
-    gameState.round = 0;
-    gameState.timeoutCount = 0;
-    gameState.eventCount = 0;
-    gameState.lastOptionType = null;
-    gameState.lastQuestionType = null;  // ADD THIS LINE
-    gameState.currentQuestion = null;   // ADD THIS LINE
-    gameState.repeatedOptions = {};
-    
-    // 显示游戏界面，隐藏结果界面
-    startScreen.classList.add('hidden');
-    mainGameScreen.classList.remove('hidden');
-    resultScreen.classList.add('hidden');
-    
-    // 更新状态栏
-    updateStatusBars();
-    
-    // // 生成初始需求
-    // generateNewNeed();
-    
-    // // 生成初始选项
-    // generateOptions();
-    // To this:
-    generateQuestion();
-    
-    // 开始计时
-    startTimer();
-}
 
-// 页面加载完成后，显示开始界面并添加事件监听
-document.addEventListener('DOMContentLoaded', () => {
-    // 显示正确的初始界面
-    startScreen.classList.remove('hidden');
-    mainGameScreen.classList.add('hidden');
-    resultScreen.classList.add('hidden');
-    
-    // 更新UI文本 - ADD THIS LINE
-    updateUITexts();
-    
-    // 确保按钮存在后再添加事件监听
-    if (startGameBtn) {
-        startGameBtn.addEventListener('click', initGame);
-        console.log('Start game button event listener added');
-    } else {
-        console.error('Start game button not found');
-    }
-    
-    if (restartGameBtn) {
-        restartGameBtn.addEventListener('click', initGame);
-        console.log('Restart game button event listener added');
-    } else {
-        console.error('Restart game button not found');
-    }
-    
-    // 调试日志
-    console.log('Game initialized and ready to start');
-});
+        // 更新状态栏颜色和表情
+        function updateBarColors() {
+            // 得分颜色和表情
+            if (gameState.score < 30) {
+                momoMoodBar.className = "progress-fill bg-red-500";
+                momoMoodEmoji.textContent = "😱";
+            } else if (gameState.score < 60) {
+                momoMoodBar.className = "progress-fill bg-orange-400";
+                momoMoodEmoji.textContent = "😔";
+            } else if (gameState.score < 80) {
+                momoMoodBar.className = "progress-fill bg-yellow-400";
+                momoMoodEmoji.textContent = "🙂";
+            } else if (gameState.score < 95) {
+                momoMoodBar.className = "progress-fill bg-green-400";
+                momoMoodEmoji.textContent = "😊";
+            } else {
+                momoMoodBar.className = "progress-fill bg-green-500";
+                momoMoodEmoji.textContent = "🎉";
+            }
+
+            // 正确率颜色和表情
+            if (gameState.correctAnswers < 30) {
+                momoLoveBar.className = "progress-fill bg-red-500";
+                momoLoveEmoji.textContent = "❌";
+            } else if (gameState.correctAnswers < 60) {
+                momoLoveBar.className = "progress-fill bg-orange-400";
+                momoLoveEmoji.textContent = "⚠️";
+            } else if (gameState.correctAnswers < 80) {
+                momoLoveBar.className = "progress-fill bg-yellow-400";
+                momoLoveEmoji.textContent = "✓";
+            } else if (gameState.correctAnswers < 95) {
+                momoLoveBar.className = "progress-fill bg-green-400";
+                momoLoveEmoji.textContent = "✅";
+            } else {
+                momoLoveBar.className = "progress-fill bg-green-500";
+                momoLoveEmoji.textContent = "🏆";
+            }
+        }
+
+
+        // 更新师姐的反馈
+        function updateFeedback() {
+            // 根据得分获取对应的反馈
+            const feedback = scoreFeedbacks.find(f => gameState.score >= f.min && gameState.score <= f.max);
+
+            // 更新场景描述
+            sceneDescription.textContent = feedback.text;
+
+            // 更新师姐的对话
+            if (gameState.score < 40) {
+                // 在得分低时，显示负面评语
+                const randomIndex = Math.floor(Math.random() * negativeFeedback.length);
+                momoQuote.textContent = `"${negativeFeedback[randomIndex]}"`;
+            } else if (gameState.score >= 80) {
+                // 在得分高时，显示正面评语
+                const randomIndex = Math.floor(Math.random() * positiveFeedback.length);
+                momoQuote.textContent = `"${positiveFeedback[randomIndex]}"`;
+            } else {
+                // 在中间状态时，显示反馈中的评语
+                momoQuote.textContent = `"${feedback.phrase}"`;
+            }
+        }
+
+        // 生成问题和选项
+        function generateQuestion() {
+            // 清空选项容器
+            optionsContainer.innerHTML = '';
+
+            // 从问题池中随机选择一个问题
+            const randomIndex = Math.floor(Math.random() * questionPool.length);
+            const selectedQuestion = questionPool[randomIndex];
+            gameState.currentQuestion = selectedQuestion;
+
+            // 设置问题描述
+            sceneDescription.textContent = selectedQuestion.question;
+
+            // 打乱选项顺序
+            const shuffledAnswers = [...selectedQuestion.answers];
+            shuffleArray(shuffledAnswers);
+
+            // 创建选项按钮
+            shuffledAnswers.forEach(answer => {
+                const button = document.createElement('button');
+                button.className = 'option-btn w-full p-3 mb-2 text-left border border-gray-200 rounded hover:bg-blue-50 transition';
+                button.textContent = answer.text;
+
+                // 添加选项事件
+                button.addEventListener('click', () => {
+                    handleAnswerSelect(answer);
+                });
+
+                optionsContainer.appendChild(button);
+            });
+
+            // 更新师姐对话为问题提示
+            momoQuote.textContent = `"${selectedQuestion.question}"`;
+        }
+
+
+        // 处理答案选择
+        function handleAnswerSelect(answer) {
+            // 停止计时器
+            clearInterval(timerInterval);
+            timerBar.classList.remove('timer-active');
+        
+            // 在这里添加设置时间条宽度的代码
+            timerBar.style.width = `${(timeLeft / gameState.timerDuration) * 100}%`;
+
+            // 计算得分变化
+            let scoreEffect = 0;
+            let correctEffect = 0;
+
+            if (answer.isCorrect) {
+                // 答对了，增加得分和正确率
+                scoreEffect = 10;
+                correctEffect = 15;
+
+                // 更新师姐对话为正面评价
+                const randomIndex = Math.floor(Math.random() * positiveFeedback.length);
+                momoQuote.textContent = `"${positiveFeedback[randomIndex]}"`;
+            } else {
+                // 答错了，减少得分和正确率
+                scoreEffect = -15;
+                correctEffect = -10;
+
+                // 更新师姐对话为负面评价
+                const randomIndex = Math.floor(Math.random() * negativeFeedback.length);
+                momoQuote.textContent = `"${negativeFeedback[randomIndex]}"`;
+            }
+
+            // 如果得分低于40，效果减半
+            if (gameState.score < 40) {
+                scoreEffect = Math.floor(scoreEffect / 2);
+                correctEffect = Math.floor(correctEffect / 2);
+            }
+
+            // 更新游戏状态
+            gameState.score = Math.max(0, Math.min(100, gameState.score + scoreEffect));
+            gameState.correctAnswers = Math.max(0, Math.min(100, gameState.correctAnswers + correctEffect));
+            gameState.lastQuestionType = gameState.currentQuestion.type;
+            // To ensure consistency with any remaining old code:
+            gameState.lastOptionType = gameState.currentQuestion.type;
+            // 更新状态栏
+            updateStatusBars();
+
+            // 继续游戏
+            continueGame();
+        }
+
+        // // 处理选项选择
+        // function handleOptionSelect(option) {
+        //     // 停止计时器
+        //     clearInterval(timerInterval);
+        //     timerBar.classList.remove('timer-active');
+
+        //     // 计算选项效果
+        //     let moodEffect = option.mood;
+        //     let loveEffect = option.love;
+
+        //     // 检查是否与当前需求匹配
+        //     const isMatchingNeed = option.type === gameState.currentNeed;
+
+        //     // 如果匹配需求，效果提升
+        //     if (isMatchingNeed) {
+        //         moodEffect = Math.floor(moodEffect * 1.5);
+        //         loveEffect = Math.floor(loveEffect * 1.3);
+        //     }
+
+        //     // 检查是否重复使用同类型选项
+        //     if (gameState.lastOptionType === option.type) {
+        //         // 记录重复次数
+        //         gameState.repeatedOptions[option.type] = (gameState.repeatedOptions[option.type] || 0) + 1;
+
+        //         // 根据重复次数降低效果
+        //         const repeatFactor = Math.max(0.3, 1 - (gameState.repeatedOptions[option.type] * 0.3));
+        //         moodEffect = Math.floor(moodEffect * repeatFactor);
+        //         loveEffect = Math.floor(loveEffect * repeatFactor);
+        //     } else {
+        //         // 重置该类型的重复计数
+        //         gameState.repeatedOptions[option.type] = 0;
+        //     }
+
+        //     // 如果魔魔心情低于40，效果减半
+        //     if (gameState.score < 40) {
+        //         moodEffect = Math.floor(moodEffect / 2);
+        //         loveEffect = Math.floor(loveEffect / 2);
+        //     }
+
+        //     // 更新游戏状态
+        //     gameState.score = Math.max(0, Math.min(100, gameState.score + moodEffect));
+        //     gameState.correctAnswers = Math.max(0, Math.min(100, gameState.correctAnswers + loveEffect));
+        //     // gameState.kokoMood = Math.max(0, Math.min(100, gameState.kokoMood + option.self));
+        //     gameState.lastOptionType = option.type;
+
+        //     // 更新状态栏
+        //     updateStatusBars();
+
+        //     // 继续游戏
+        //     continueGame();
+        // }
+
+        // 继续游戏
+        function continueGame() {
+            // 增加回合数
+            gameState.round++;
+
+            // 更新回合显示
+            roundCounter.textContent = `第${gameState.round}/${gameState.maxRounds}轮`;
+
+            // 检查游戏是否结束
+            if (gameState.round >= gameState.maxRounds) {
+                endGame();
+                return;
+            }
+
+            // 可能触发随机事件
+            if (Math.random() < 0.3) { // 30%几率触发随机事件
+                triggerRandomEvent();
+            } else {
+                // 生成新的问题和选项
+                generateQuestion();
+
+                // 开始新一轮计时
+                startTimer();
+            }
+        }
+
+
+        // 触发随机事件
+        function triggerRandomEvent() {
+            // 选择一个随机事件
+            const randomEvent = randomEventsData[Math.floor(Math.random() * randomEventsData.length)];
+
+            // 更新事件计数
+            gameState.eventCount++;
+
+            // 暂停计时器期间，保持时间条状态
+            timerBar.style.width = `${(timeLeft / gameState.timerDuration) * 100}%`;
+
+            // 显示事件通知
+            eventTitle.textContent = randomEvent.title;
+            eventDesc.textContent = randomEvent.desc;
+            eventNotification.classList.remove('hidden');
+            eventNotification.classList.add('event-notification');
+
+            // 应用事件效果
+            gameState.score = Math.max(0, gameState.score + randomEvent.scoreEffect);
+            gameState.correctAnswers = Math.max(0, gameState.correctAnswers + randomEvent.correctEffect);
+
+            // 更新状态栏
+            updateStatusBars();
+
+            // 3秒后隐藏通知并继续游戏
+            setTimeout(() => {
+                eventNotification.classList.add('hidden');
+                eventNotification.classList.remove('event-notification');
+
+                // 生成新的问题和选项
+                generateQuestion();
+
+                // 开始新一轮计时
+                startTimer();
+            }, 3000);
+        }
+
+
+        // 生成新的需求
+        function generateNewNeed() {
+            // 获取所有需求类型
+            const needTypes = Object.values(optionTypes);
+
+            // 随机选择一个需求（避免重复）
+            let newNeed;
+            do {
+                newNeed = needTypes[Math.floor(Math.random() * needTypes.length)];
+            } while (newNeed === gameState.currentNeed);
+
+            gameState.currentNeed = newNeed;
+
+            // 更新需求显示
+            // currentNeedElement.textContent = needDescriptions[newNeed];
+        }
+        // 在startTimer函数中修改时间条实现方式
+        function startTimer() {
+            // 重置计时器
+            timeLeft = gameState.timerDuration;
+            timerText.textContent = `剩余时间: ${timeLeft}秒`;
+
+            // 移除CSS动画类，改用JavaScript控制宽度
+            timerBar.classList.remove('timer-active');
+            // 重置时间条宽度为100%
+            timerBar.style.width = '100%';
+            timerBar.style.backgroundColor = '#60a5fa'; // 蓝色开始
+
+            // 清除之前的计时器
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // 启动计时器
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerText.textContent = `剩余时间: ${timeLeft}秒`;
+
+                // 更新时间条宽度
+                const percentage = (timeLeft / gameState.timerDuration) * 100;
+                timerBar.style.width = `${percentage}%`;
+
+                // 更新时间条颜色
+                if (percentage <= 50) {
+                    timerBar.style.backgroundColor = '#f59e0b'; // 黄色
+                }
+                if (percentage <= 25) {
+                    timerBar.style.backgroundColor = '#ef4444'; // 红色
+                }
+
+                if (timeLeft <= 0) {
+                    // 计时结束
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        // 处理超时
+        function handleTimeout() {
+            // 增加超时计数
+            gameState.timeoutCount++;
+
+            // 设置时间条宽度为0
+            timerBar.style.width = '0%';
+
+            // 因为超时没有回答，降低得分和正确率
+            gameState.score = Math.max(0, gameState.score - 10);
+            gameState.correctAnswers = Math.max(0, gameState.correctAnswers - 8);
+
+            // 更新状态栏
+            updateStatusBars();
+
+            // 继续游戏
+            continueGame();
+        }
+
+        // 结束游戏
+        function endGame() {
+            // 停止计时器
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // 隐藏游戏主界面，显示结果界面
+            mainGameScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+
+            // 设置最终指标
+            finalMomoMood.textContent = gameState.score;
+            finalMomoLove.textContent = gameState.correctAnswers;
+
+            // 设置最终表情
+            updateFinalEmojis();
+
+            // 设置游戏数据
+            totalActions.textContent = gameState.round;
+            randomEventsElement.textContent = gameState.eventCount;
+            timeoutCount.textContent = gameState.timeoutCount;
+
+            // 判断游戏结果
+            const victory = gameState.score >= 95 && gameState.correctAnswers >= 95;
+            const goodEnding = gameState.score >= 80 && gameState.correctAnswers >= 80;
+            const neutralEnding = gameState.score >= 60 && gameState.correctAnswers >= 60;
+
+            // 设置结果描述
+            if (victory) {
+                resultTitle.textContent = "完美通关！";
+                resultDesc.textContent = "恭喜你成功完成所有问题！你对实验技术的掌握令人印象深刻！";
+                resultBorder.className = "border-l-4 border-green-500 pl-3 mb-6";
+                document.getElementById('momo-final-quote').textContent = `"太厉害了！你的知识水平非常扎实，我对你刮目相看！"`;
+            } else if (goodEnding) {
+                resultTitle.textContent = "优秀通关！";
+                resultDesc.textContent = "你表现出了扎实的知识基础，只有少数问题没有答对。继续保持！";
+                resultBorder.className = "border-l-4 border-blue-500 pl-3 mb-6";
+                document.getElementById('momo-final-quote').textContent = `"很不错，你对基础知识掌握得相当好！"`;
+            } else if (neutralEnding) {
+                resultTitle.textContent = "基本通关";
+                resultDesc.textContent = "你对基础知识有一定掌握，但还有提升空间。建议继续加强学习！";
+                resultBorder.className = "border-l-4 border-yellow-500 pl-3 mb-6";
+                document.getElementById('momo-final-quote').textContent = `"还不错，但需要更加努力学习这些基础知识。"`;
+            } else {
+                resultTitle.textContent = "挑战失败";
+                resultDesc.textContent = "你对这些实验技术的理解还有所欠缺。建议回去复习基础知识，再来挑战！";
+                resultBorder.className = "border-l-4 border-red-500 pl-3 mb-6";
+                document.getElementById('momo-final-quote').textContent = `"基础知识太薄弱了，需要好好复习一下基本概念。"`;
+            }
+        }
+
+        // 更新最终结果表情
+        function updateFinalEmojis() {
+            // 得分表情
+            if (gameState.score < 30) {
+                finalMomoEmoji.textContent = "😱";
+            } else if (gameState.score < 60) {
+                finalMomoEmoji.textContent = "😔";
+            } else if (gameState.score < 80) {
+                finalMomoEmoji.textContent = "🙂";
+            } else if (gameState.score < 95) {
+                finalMomoEmoji.textContent = "😊";
+            } else {
+                finalMomoEmoji.textContent = "🎉";
+            }
+
+            // 正确率表情
+            if (gameState.correctAnswers < 30) {
+                finalLoveEmoji.textContent = "❌";
+            } else if (gameState.correctAnswers < 60) {
+                finalLoveEmoji.textContent = "⚠️";
+            } else if (gameState.correctAnswers < 80) {
+                finalLoveEmoji.textContent = "✓";
+            } else if (gameState.correctAnswers < 95) {
+                finalLoveEmoji.textContent = "✅";
+            } else {
+                finalLoveEmoji.textContent = "🏆";
+            }
+        }
+
+        // 辅助函数：随机打乱数组
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // 初始化游戏
+        function initGame() {
+            console.log('Game initialization started');
+
+            // 重置游戏状态
+            gameState.score = 30;
+            gameState.correctAnswers = 30;
+            // gameState.kokoMood = 30;
+            gameState.gameOver = false;
+            gameState.round = 0;
+            gameState.timeoutCount = 0;
+            gameState.eventCount = 0;
+            gameState.lastOptionType = null;
+            gameState.lastQuestionType = null;  // ADD THIS LINE
+            gameState.currentQuestion = null;   // ADD THIS LINE
+            gameState.repeatedOptions = {};
+
+            // 显示游戏界面，隐藏结果界面
+            startScreen.classList.add('hidden');
+            mainGameScreen.classList.remove('hidden');
+            resultScreen.classList.add('hidden');
+
+            // 更新状态栏
+            updateStatusBars();
+
+            // // 生成初始需求
+            // generateNewNeed();
+
+            // // 生成初始选项
+            // generateOptions();
+            // To this:
+            generateQuestion();
+
+            // 开始计时
+            startTimer();
+        }
+
+        // 页面加载完成后，显示开始界面并添加事件监听
+        document.addEventListener('DOMContentLoaded', () => {
+            // 显示正确的初始界面
+            startScreen.classList.remove('hidden');
+            mainGameScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+
+            // 更新UI文本 - ADD THIS LINE
+            updateUITexts();
+
+            // 确保按钮存在后再添加事件监听
+            if (startGameBtn) {
+                startGameBtn.addEventListener('click', initGame);
+                console.log('Start game button event listener added');
+            } else {
+                console.error('Start game button not found');
+            }
+
+            if (restartGameBtn) {
+                restartGameBtn.addEventListener('click', initGame);
+                console.log('Restart game button event listener added');
+            } else {
+                console.error('Restart game button not found');
+            }
+
+            // 调试日志
+            console.log('Game initialized and ready to start');
+            // 在document.addEventListener('DOMContentLoaded', () => { 函数中添加以下代码
+            // 修改时间条的CSS样式
+            const timerBarElement = document.getElementById('timer-bar');
+            if (timerBarElement) {
+                // 移除原有的动画相关CSS
+                timerBarElement.style.animationName = 'none';
+                timerBarElement.style.animationPlayState = 'none';
+
+                // 确保宽度可以通过JS控制
+                timerBarElement.style.width = '100%';
+                timerBarElement.style.transition = 'width 0.2s linear, background-color 0.5s';
+            }
+        });
     </script>
