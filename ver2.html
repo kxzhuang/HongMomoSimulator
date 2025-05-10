@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>师姐心情模拟器 </title>
+    <title>QX师姐心情模拟器 </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -94,7 +94,7 @@
     <div class="max-w-md mx-auto bg-white shadow-sm min-h-screen relative">
         <!-- 顶部标题 -->
         <div class="text-center py-4 border-b border-gray-200">
-            <h1 class="text-xl font-bold text-red-800">师姐心情模拟器</h1>
+            <h1 class="text-xl font-bold text-red-800">QX师姐心情模拟器</h1>
             <p class="text-gray-500 text-sm">zkx视角模拟器</p>
         </div>
 
@@ -357,7 +357,7 @@
             {
                 title: "突发问题",
                 desc: "你忘记回收师姐珍贵的断货了订不到的119一抗了！",
-                scoreEffect: -20,
+                scoreEffect: -15,
                 correctEffect: -10
             },
             {
@@ -457,16 +457,6 @@
 
             // 蛋白纯化问题
             {
-                question: "以下哪种方法不适用于蛋白质的初步纯化？",
-                answers: [
-                    { text: "质谱分析", isCorrect: true },
-                    { text: "盐析法", isCorrect: false },
-                    { text: "离子交换色谱", isCorrect: false },
-                    { text: "分子筛色谱", isCorrect: false }
-                ],
-                type: questionTypes.PROTEIN
-            },
-            {
                 question: "亲和色谱法纯化蛋白质的原理是基于：",
                 answers: [
                     { text: "蛋白质与配体之间的特异性相互作用", isCorrect: true },
@@ -485,38 +475,6 @@
                     { text: "甘氨酸（Glycine）", isCorrect: false }
                 ],
                 type: questionTypes.PROTEIN
-            },
-
-            // 分子克隆问题
-            {
-                question: "在构建重组质粒时，连接酶的主要功能是：",
-                answers: [
-                    { text: "在DNA片段之间形成磷酸二酯键", isCorrect: true },
-                    { text: "切割DNA特定位点", isCorrect: false },
-                    { text: "解旋DNA双链", isCorrect: false },
-                    { text: "合成新的DNA链", isCorrect: false }
-                ],
-                type: questionTypes.CLONING
-            },
-            {
-                question: "以下哪种酶不常用于分子克隆？",
-                answers: [
-                    { text: "RNA聚合酶II", isCorrect: true },
-                    { text: "限制性内切酶", isCorrect: false },
-                    { text: "DNA连接酶", isCorrect: false },
-                    { text: "碱性磷酸酶", isCorrect: false }
-                ],
-                type: questionTypes.CLONING
-            },
-            {
-                question: "Gateway克隆技术的原理基于：",
-                answers: [
-                    { text: "位点特异性重组", isCorrect: true },
-                    { text: "同源重组", isCorrect: false },
-                    { text: "限制性酶切和连接", isCorrect: false },
-                    { text: "PCR扩增", isCorrect: false }
-                ],
-                type: questionTypes.CLONING
             },
 
             // PCR技术问题
@@ -901,7 +859,7 @@
             }
 
             // 可能触发随机事件
-            if (Math.random() < 0.5) { // 30%几率触发随机事件
+            if (Math.random() < 0.2) { // 20%几率触发随机事件
                 triggerRandomEvent();
             } else {
                 // 生成新的问题和选项
