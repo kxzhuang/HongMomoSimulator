@@ -305,50 +305,29 @@
             [questionTypes.CELL]: "细胞培养问题"
         };
 
-        // // 魔魔的负面和正面话语
-        // const momoNegativePhrases = [
-        //     "不理你了！勾石！",
-        //     "你根本不懂我！",
-        //     "我很生气！",
-        //     "你总是这样！",
-        //     "我恨死你了！",
-        //     "你根本不在乎我！",
-        //     "我感觉你一点都不爱我...",
-        //     "你就知道工作，都不陪我！"
-        // ];
-
-        // const momoPositivePhrases = [
-        //     "棒棒！",
-        //     "真可爱~",
-        //     "赏猫！",
-        //     "你最好了！",
-        //     "勉强原谅你一下下~",
-        //     "嗯...你还算有点良心",
-        //     "好啦好啦，不生气了~",
-        //     "你，爱你哦~"
-        // ];
+        
 
         // 师姐的负面和正面评语
         const negativeFeedback = [
             "这都不会？你确定学过生物吗？",
             "这么简单的问题都答错，再认真想想！",
             "不对，这是基础知识，要复习一下了。",
-            "差远了，重新看看教材吧！",
+            "这个我之前问过你，不要再让我反复讲",
             "这个答案完全不对，你再想想？",
             "错误，你是不是没听课？",
-            "不行不行，基础太差了！",
-            "这个都不知道，要加油了！"
+            "我平时是这么说的？",
+            "这个是基础！"
         ];
 
         const positiveFeedback = [
-            "回答正确，真棒！",
-            "很好，看来你掌握得不错！",
-            "对，就是这样！",
+            "对！",
+            "说得对",
+            "对，就是这样",
             "答对了，继续保持！",
             "非常好，你理解得很透彻！",
-            "正确！你的基础打得很牢固！",
+            "正确！",
             "对的，你掌握了要点！",
-            "完全正确，你很有天赋！"
+            "完全正确
         ];
 
 
@@ -386,193 +365,7 @@
             }
         ];
 
-        // // 选项池
-        // const optionPool = [
-        //     // 道歉类选项
-        //     { 
-        //         text: "对不起，魔魔，我不应该说那些话伤害你的感受。", 
-        //         mood: 12, 
-        //         love: 10, 
-        //         self: -5,
-        //         type: optionTypes.APOLOGY 
-        //     },
-        //     { 
-        //         text: "魔魔，我真的很抱歉，我说话不经思考，伤害了你。", 
-        //         mood: 15, 
-        //         love: 12, 
-        //         self: -8,
-        //         type: optionTypes.APOLOGY 
-        //     },
-        //     { 
-        //         text: "我错了，那些话我不该说，伤害了你我很后悔。", 
-        //         mood: 10, 
-        //         love: 8, 
-        //         self: -10,
-        //         type: optionTypes.APOLOGY 
-        //     },
-
-        //     // 礼物类选项
-        //     { 
-        //         text: "我给你买了你最喜欢的奶茶，加了两份珍珠。", 
-        //         mood: 8, 
-        //         love: 12, 
-        //         self: -8,
-        //         type: optionTypes.GIFT 
-        //     },
-        //     { 
-        //         text: "看，我偷偷给你准备了这个小礼物，希望你会喜欢。", 
-        //         mood: 10, 
-        //         love: 15, 
-        //         self: -10,
-        //         type: optionTypes.GIFT 
-        //     },
-        //     { 
-        //         text: "给魔魔买了你最爱吃的肉肉，现在就去做给你吃！", 
-        //         mood: 12, 
-        //         love: 18, 
-        //         self: -8,
-        //         type: optionTypes.GIFT 
-        //     },
-
-        //     // 肢体接触类选项
-        //     { 
-        //         text: "过来，亲亲魔魔~", 
-        //         mood: 15, 
-        //         love: 18, 
-        //         self: -5,
-        //         type: optionTypes.PHYSICAL 
-        //     },
-        //     { 
-        //         text: "要不要抱抱？我知道抱抱可以让你舒服一点。", 
-        //         mood: 12, 
-        //         love: 15, 
-        //         self: -3,
-        //         type: optionTypes.PHYSICAL 
-        //     },
-        //     { 
-        //         text: "来，举高高！", 
-        //         mood: 18, 
-        //         love: 15, 
-        //         self: -8,
-        //         type: optionTypes.PHYSICAL 
-        //     },
-
-        //     // 高质量陪伴选项
-        //     { 
-        //         text: "我们一起去吃你最喜欢的那家火锅吧？我知道你想去很久了。", 
-        //         mood: 10, 
-        //         love: 12, 
-        //         self: -3,
-        //         type: optionTypes.QUALITY_TIME 
-        //     },
-        //     { 
-        //         text: "要不我们一起出去散散步？散步时我可以听你说说心里的想法。", 
-        //         mood: 12, 
-        //         love: 15, 
-        //         self: 0,
-        //         type: optionTypes.QUALITY_TIME 
-        //     },
-        //     { 
-        //         text: "魔魔，我们一起看个电影放松一下吧。你挑你喜欢的！", 
-        //         mood: 8, 
-        //         love: 10, 
-        //         self: 0,
-        //         type: optionTypes.QUALITY_TIME 
-        //     },
-
-        //     // 承诺类选项
-        //     { 
-        //         text: "我以后会更注意自己的言行，不会再这样伤害你了。", 
-        //         mood: 8, 
-        //         love: 12, 
-        //         self: -5,
-        //         type: optionTypes.PROMISE 
-        //     },
-        //     { 
-        //         text: "我保证以后会多花时间陪你，把你放在第一位。", 
-        //         mood: 12, 
-        //         love: 15, 
-        //         self: -8,
-        //         type: optionTypes.PROMISE 
-        //     },
-        //     { 
-        //         text: "我会改变，真的。从今天开始，我会更关心你的感受。", 
-        //         mood: 10, 
-        //         love: 12, 
-        //         self: -5,
-        //         type: optionTypes.PROMISE 
-        //     },
-
-        //     // 转移注意力选项
-        //     { 
-        //         text: "给你看我珍藏的搞笑视频，保证让你笑。", 
-        //         mood: 8, 
-        //         love: 5, 
-        //         self: 3,
-        //         type: optionTypes.DISTRACTION 
-        //     },
-        //     { 
-        //         text: "我给你跳个舞吧！我偷偷练了好久，就等着给你看呢。", 
-        //         mood: 15, 
-        //         love: 18, 
-        //         self: -8,
-        //         type: optionTypes.DISTRACTION 
-        //     },
-        //     { 
-        //         text: "魔魔，让我给你挠挠痒痒吧，知道你最喜欢这个了。", 
-        //         mood: 18, 
-        //         love: 20, 
-        //         self: -5,
-        //         type: optionTypes.DISTRACTION 
-        //     },
-
-        //     // 解释工作忙的选项
-        //     { 
-        //         text: "对不起魔魔，我这几天work太忙了，没有照顾好你的感受。", 
-        //         mood: 15, 
-        //         love: 18, 
-        //         self: -5,
-        //         type: optionTypes.SELF_EXPLANATION 
-        //     },
-        //     { 
-        //         text: "我这段时间work太忙了，不应该把情绪带给你，我很抱歉。", 
-        //         mood: 12, 
-        //         love: 15, 
-        //         self: -8,
-        //         type: optionTypes.SELF_EXPLANATION 
-        //     },
-        //     { 
-        //         text: "我知道我最近太忙了，没有陪你，让你感到被忽视了，对不起。", 
-        //         mood: 15, 
-        //         love: 20, 
-        //         self: -5,
-        //         type: optionTypes.SELF_EXPLANATION 
-        //     },
-
-        //     // 负面选项
-        //     { 
-        //         text: "你先冷静一下，等你气消了我们再谈吧。", 
-        //         mood: -15, 
-        //         love: -20, 
-        //         self: 5,
-        //         type: optionTypes.APOLOGY 
-        //     },
-        //     { 
-        //         text: "我一定是太累了才会那样说话，原谅我好吗？", 
-        //         mood: -5, 
-        //         love: -5, 
-        //         self: 10,
-        //         type: optionTypes.SELF_EXPLANATION 
-        //     },
-        //     { 
-        //         text: "要不我们还是保持点距离冷静一下吧。", 
-        //         mood: -20, 
-        //         love: -15, 
-        //         self: 8,
-        //         type: optionTypes.QUALITY_TIME 
-        //     }
-        // ];
-
+        
 
         // 问题池
         const questionPool = [
@@ -802,15 +595,6 @@
         ];
 
 
-        // // 魔魔反馈信息
-        // const momoFeedbacks = [
-        //     { min: 0, max: 20, text: "魔魔非常生气，她说再也不想理你了！", emoji: "😡", phrase: momoNegativePhrases[0] },
-        //     { min: 21, max: 40, text: "魔魔还在生气中，但偶尔会瞥你一眼...", emoji: "😠", phrase: momoNegativePhrases[1] },
-        //     { min: 41, max: 60, text: "魔魔的表情缓和了一些，但还是不太高兴", emoji: "😒", phrase: momoNegativePhrases[2] },
-        //     { min: 61, max: 80, text: "魔魔似乎消气了一点，开始愿意听你说话", emoji: "😐", phrase: momoPositivePhrases[4] },
-        //     { min: 81, max: 89, text: "魔魔已经不再生气，嘴角微微上扬", emoji: "😊", phrase: momoPositivePhrases[1] },
-        //     { min: 90, max: 100, text: "魔魔完全开心了，笑着向你靠近！", emoji: "😍", phrase: momoPositivePhrases[0] }
-        // ];
 
 
         // 得分反馈信息
@@ -866,15 +650,15 @@
         function updateUITexts() {
             // 修改顶部标题
             // document.querySelector('h1.text-xl').textContent = "实验室模拟器 - 挑战模式";
-            document.querySelector('p.text-gray-500.text-sm').textContent = "分子生物学知识问答";
+            document.querySelector('p.text-gray-500.text-sm').textContent = "刘lab知识问答";
 
             // 修改开始界面文本
-            document.querySelector('#start-screen h2').textContent = "分子生物学知识问答";
-            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答各种分子生物学问题！";
+            document.querySelector('#start-screen h2').textContent = "刘lab知识问答";
+            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答师姐提出的各种实验问题！";
 
             // 修改状态栏标签
-            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "当前得分";
-            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "正确率";
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "师姐心情值";
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "你的知识水平";
 
             // 修改时间条样式
             const timerBarElement = document.getElementById('timer-bar');
@@ -890,9 +674,9 @@
             // 修改游戏规则
             const rulesItems = document.querySelectorAll('#start-screen .my-4.bg-gray-50 ul.mb-3 li');
             rulesItems[0].textContent = "• 初始分数为30";
-            rulesItems[1].textContent = "• 胜利条件：师姐心情或正确率需达95+";
+            rulesItems[1].textContent = "• 胜利条件：师姐心情值或你的知识水平需达95+";
             rulesItems[2].textContent = "• 回合数只有10轮";
-            rulesItems[3].textContent = "• 每轮需回答不同类型的分子生物学问题";
+            rulesItems[3].textContent = "• 每轮需回答不同类型的实验问题";
             rulesItems[4].textContent = "• 随机事件会突然降低分数";
             rulesItems[5].textContent = "• 时间压力：每轮回答限时30秒";
             rulesItems[6].textContent = "• 得分低于40时，回答正确的加分效果减半";
@@ -900,8 +684,8 @@
             // 修改结果界面标签
             // Additional UI text updates
             document.querySelector('.font-bold.text-red-600.mb-1').textContent = "师姐：";
-            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "最终得分：";
-            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "正确率：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "师姐心情值：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "你的知识水平：";
         }
 
         // 更新状态栏
