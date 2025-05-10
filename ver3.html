@@ -722,7 +722,12 @@
             }
         }
 
-
+// 4. 修改 updateFeedback 函数，检查是否处于随机事件状态
+function updateFeedback() {
+    // 如果正在显示随机事件，则不更新师姐的对话
+    if (gameState.isRandomEventActive) {
+        return;
+    }
         // 更新师姐的反馈
         function updateFeedback() {
             // 根据得分获取对应的反馈
