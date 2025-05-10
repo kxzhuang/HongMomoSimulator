@@ -356,13 +356,13 @@
         const randomEventsData = [
             {
                 title: "突发问题",
-                desc: "师姐突然想起一个难题要考你！",
-                scoreEffect: -15,
+                desc: "你忘记回收师姐珍贵的断货了订不到的119一抗了！",
+                scoreEffect: -20,
                 correctEffect: -10
             },
             {
                 title: "实验室紧急情况",
-                desc: "实验室的离心机出了故障，分散了你的注意力！",
+                desc: "你忘记检查大提质粒的PW有没有加无水乙醇了",
                 scoreEffect: -10,
                 correctEffect: -15
             },
@@ -374,13 +374,13 @@
             },
             {
                 title: "疲劳影响",
-                desc: "连续实验让你太疲劳，思维变得迟钝！",
+                desc: "师姐发现你组会在摸鱼，没认真听",
                 scoreEffect: -15,
                 correctEffect: -15
             },
             {
                 title: "知识漏洞",
-                desc: "你发现有一章内容完全没复习...",
+                desc: "你忘记复习师姐交代的实验了...",
                 scoreEffect: -5,
                 correctEffect: -20
             }
@@ -681,15 +681,15 @@
         function updateUITexts() {
             // 修改顶部标题
             // document.querySelector('h1.text-xl').textContent = "实验室模拟器 - 挑战模式";
-            document.querySelector('p.text-gray-500.text-sm').textContent = "分子生物学知识问答";
+            document.querySelector('p.text-gray-500.text-sm').textContent = "zkx视角模拟器";
 
             // 修改开始界面文本
-            document.querySelector('#start-screen h2').textContent = "分子生物学知识问答";
-            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答各种分子生物学问题！";
+            document.querySelector('#start-screen h2').textContent = "zkx视角模拟器";
+            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答各种实验问题！";
 
             // 修改状态栏标签
-            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "当前得分";
-            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "正确率";
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "师姐心情值";
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "你的知识水平";
 
             // 修改时间条样式
             const timerBarElement = document.getElementById('timer-bar');
