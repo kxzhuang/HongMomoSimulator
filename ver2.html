@@ -705,18 +705,18 @@
             // 修改游戏规则
             const rulesItems = document.querySelectorAll('#start-screen .my-4.bg-gray-50 ul.mb-3 li');
             rulesItems[0].textContent = "• 初始分数为30";
-            rulesItems[1].textContent = "• 胜利条件：师姐心情或正确率需达95+";
+            rulesItems[1].textContent = "• 胜利条件：师姐心情或你的知识水平需达95+";
             rulesItems[2].textContent = "• 回合数只有10轮";
-            rulesItems[3].textContent = "• 每轮需回答不同类型的分子生物学问题";
-            rulesItems[4].textContent = "• 随机事件会突然降低分数";
+            rulesItems[3].textContent = "• 每轮需正确回答不同的实验问题";
+            rulesItems[4].textContent = "• 随机事件会突然降低师姐心情";
             rulesItems[5].textContent = "• 时间压力：每轮回答限时30秒";
             rulesItems[6].textContent = "• 得分低于40时，回答正确的加分效果减半";
 
             // 修改结果界面标签
             // Additional UI text updates
             document.querySelector('.font-bold.text-red-600.mb-1').textContent = "师姐：";
-            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "最终得分：";
-            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "正确率：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "师姐心情：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "你的知识水平：";
         }
 
         // 更新状态栏
