@@ -901,7 +901,7 @@
             }
 
             // 可能触发随机事件
-            if (Math.random() < 0.3) { // 30%几率触发随机事件
+            if (Math.random() < 0.5) { // 30%几率触发随机事件
                 triggerRandomEvent();
             } else {
                 // 生成新的问题和选项
@@ -1085,7 +1085,7 @@
                 resultTitle.textContent = "挑战失败";
                 resultDesc.textContent = "无论是实验技术还是与师姐的交流，你都表现欠佳。建议重新调整策略，再来一次！";
                 resultBorder.className = "border-l-4 border-red-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"唉，看来你还需要多多练习，实验技术和社交技巧都是..."`;
+                document.getElementById('momo-final-quote').textContent = `"唉，你再回去复习复习，这么基础的都能答错"`;
             }
         }
         // 更新最终结果表情
