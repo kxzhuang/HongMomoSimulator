@@ -330,25 +330,25 @@
 
         // 师姐的负面和正面评语
         const negativeFeedback = [
-            "这都不会？你确定学过生物吗？",
+            "我平时是这么说的吗",
             "这么简单的问题都答错，再认真想想！",
             "不对，这是基础知识，要复习一下了。",
-            "差远了，重新看看教材吧！",
+            "是这样吗",
             "这个答案完全不对，你再想想？",
-            "错误，你是不是没听课？",
-            "不行不行，基础太差了！",
-            "这个都不知道，要加油了！"
+            "你再想想？",
+            "错了！",
+            "这个都不知道"
         ];
 
         const positiveFeedback = [
-            "回答正确，真棒！",
-            "很好，看来你掌握得不错！",
+            "回答正确",
+            "很好",
             "对，就是这样！",
             "答对了，继续保持！",
-            "非常好，你理解得很透彻！",
-            "正确！你的基础打得很牢固！",
+            "嗯",
+            "正确！",
             "对的，你掌握了要点！",
-            "完全正确，你很有天赋！"
+            "完全正确"
         ];
 
 
@@ -1059,31 +1059,31 @@
             if (highScore && highCorrect) {
                 // 双高 - 完美结局
                 resultTitle.textContent = "完美通关！";
-                resultDesc.textContent = "恭喜你！不仅精通了实验技术，也获得了师姐的青睐。你是实验室里的传奇！";
+                resultDesc.textContent = "恭喜你！你精通了实验技术，是实验室里的传奇！";
                 resultBorder.className = "border-l-4 border-green-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"太厉害了！你的知识水平非常扎实，前途无量，以后多指教我哦！"`;
+                document.getElementById('momo-final-quote').textContent = `"太厉害了！未来的院士/诺奖！"`;
             } else if (highScore && !highCorrect) {
-                // 高分低正确率 - 获得师姐青睐但技术一般
+                // 高分低正确率 - 不错
                 resultTitle.textContent = "感情胜利！";
-                resultDesc.textContent = "虽然你的实验技术还有待提高，但你赢得了师姐的好感。有时候，人际关系比技术更重要！";
+                resultDesc.textContent = "虽然你的实验技术还有待提高，但你是个好人！";
                 resultBorder.className = "border-l-4 border-pink-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"虽然你的实验做得一般，但是我很喜欢你的态度和热情！我可以教你更多知识~"`;
+                document.getElementById('momo-final-quote').textContent = `"继续保持！"`;
             } else if (!highScore && highCorrect) {
-                // 低分高正确率 - 技术精湛但没获得师姐青睐
+                // 低分高正确率 - 不错
                 resultTitle.textContent = "技术胜利！";
-                resultDesc.textContent = "你的实验技术非常出色，但似乎忽略了与师姐的沟通。记住，实验室里不只有实验！";
+                resultDesc.textContent = "你的实验技术非常出色";
                 resultBorder.className = "border-l-4 border-blue-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"你的实验技术确实很强，但你总是那么冷淡...多和师姐交流一下嘛！"`;
+                document.getElementById('momo-final-quote').textContent = `"你的实验进步很大"`;
             } else if (gameState.score >= 60 || gameState.correctAnswers >= 60) {
                 // 一般表现 - 及格但不出色
                 resultTitle.textContent = "基本通关";
-                resultDesc.textContent = "你的表现还算及格，但无论是实验技术还是与师姐的关系，都还有很大提升空间。";
+                resultDesc.textContent = "你的表现还算及格，但还有很大提升空间。";
                 resultBorder.className = "border-l-4 border-yellow-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"还不错，但需要更加努力，无论是实验还是...其他方面。"`;
+                document.getElementById('momo-final-quote').textContent = `"还不错，但需要更加努力"`;
             } else {
                 // 双低 - 失败
                 resultTitle.textContent = "挑战失败";
-                resultDesc.textContent = "无论是实验技术还是与师姐的交流，你都表现欠佳。建议重新调整策略，再来一次！";
+                resultDesc.textContent = "建议重新调整策略，再来一次！";
                 resultBorder.className = "border-l-4 border-red-500 pl-3 mb-6";
                 document.getElementById('momo-final-quote').textContent = `"唉，你再回去复习复习，这么基础的都能答错"`;
             }
