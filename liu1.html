@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>刘老师心情模拟器 </title>
+    <title>刘老师模拟器 </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -356,31 +356,31 @@
         const randomEventsData = [
             {
                 title: "突发问题",
-                desc: "你忘记回收师姐珍贵的断货了订不到的119一抗了！",
+                desc: "刘老师发现你一个星期没来实验室了",
                 scoreEffect: -15,
                 correctEffect: -10
             },
             {
                 title: "紧急情况",
-                desc: "你忘记检查大提质粒的PW有没有加无水乙醇了",
+                desc: "刘老师发现你对基础知识一丁点都不知道",
                 scoreEffect: -10,
                 correctEffect: -15
             },
             {
-                title: "思路混乱",
-                desc: "你突然发现自己的笔记混乱了，知识点全搞混了...",
+                title: "突发意外",
+                desc: "你没配平离心机，把实验室炸了",
                 scoreEffect: -20,
                 correctEffect: -5
             },
             {
                 title: "被发现了",
-                desc: "师姐发现你组会在摸鱼，没认真听",
+                desc: "刘老师发现你组会在摸鱼，没认真听",
                 scoreEffect: -15,
                 correctEffect: -15
             },
             {
-                title: "知识漏洞",
-                desc: "你忘记复习师姐交代的实验了...",
+                title: "突发意外",
+                desc: "你把珍贵的一抗给倒了..",
                 scoreEffect: -5,
                 correctEffect: -20
             }
@@ -653,11 +653,11 @@
             // 修改游戏规则
             const rulesItems = document.querySelectorAll('#start-screen .my-4.bg-gray-50 ul.mb-3 li');
             rulesItems[0].textContent = "• 初始分数为30";
-            rulesItems[1].textContent = "• 胜利条件：师姐心情或你的知识水平需达95+";
+            rulesItems[1].textContent = "• 胜利条件：刘老师心情或你的知识水平需达95+";
             rulesItems[2].textContent = "• 回合数只有10轮";
             rulesItems[3].textContent = "• 每轮需正确回答不同的实验问题";
-            rulesItems[4].textContent = "• 随机事件会突然降低师姐心情";
-            rulesItems[5].textContent = "• 时间压力：每轮回答限时30秒";
+            rulesItems[4].textContent = "• 随机事件会突然降低刘老师心情";
+            rulesItems[5].textContent = "• 时间压力：每轮回答限时10秒";
             rulesItems[6].textContent = "• 得分低于40时，回答正确的加分效果减半";
 
             // 修改结果界面标签
@@ -1012,7 +1012,7 @@
                 document.getElementById('momo-final-quote').textContent = `"太厉害了！未来的院士/诺奖！"`;
             } else if (highScore && !highCorrect) {
                 // 高分低正确率 - 不错
-                resultTitle.textContent = "感情胜利！";
+                resultTitle.textContent = "不错的胜利！";
                 resultDesc.textContent = "你的实验技术还有待提高！";
                 resultBorder.className = "border-l-4 border-pink-500 pl-3 mb-6";
                 document.getElementById('momo-final-quote').textContent = `"继续努力！"`;
