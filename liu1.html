@@ -1017,7 +1017,7 @@
             if (highScore && highCorrect) {
                 // 双高 - 完美结局
                 resultTitle.textContent = "cool！";
-                resultDesc.textContent = "恭喜你！你精通了实验技术，是实验室里的传奇！";
+                resultDesc.textContent = "恭喜你！你精通了科研，是实验室里的传奇！";
                 resultBorder.className = "border-l-4 border-green-500 pl-3 mb-6";
                 document.getElementById('momo-final-quote').textContent = `"太厉害了！未来的院士/诺奖！"`;
             } else if (highScore && !highCorrect) {
@@ -1031,7 +1031,7 @@
                 resultTitle.textContent = "cool！";
                 resultDesc.textContent = "你的实验进步很大";
                 resultBorder.className = "border-l-4 border-blue-500 pl-3 mb-6";
-                document.getElementById('momo-final-quote').textContent = `"多看看文献，认真听组会"`;
+                document.getElementById('momo-final-quote').textContent = `"多看看文献，多跟师姐学习学习"`;
             } else if (gameState.score >= 60 || gameState.correctAnswers >= 60) {
                 // 一般表现 - 及格但不出色
                 resultTitle.textContent = "基本通关";
