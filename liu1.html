@@ -330,10 +330,10 @@
 
         // 师姐的负面和正面评语
         const negativeFeedback = [
-            "我平时是这么说的吗",
+            "。。。",
             "细心一点！",
             "这是基础",
-            "笑了",
+            "。。。。。",
             "......",
             "你再想想？",
             "是这样吗",
@@ -356,7 +356,7 @@
         const randomEventsData = [
             {
                 title: "突发问题",
-                desc: "刘老师发现你一个星期没来实验室了",
+                desc: "在实验室吃零食被检察人员发现了",
                 scoreEffect: -15,
                 correctEffect: -10
             },
@@ -435,7 +435,7 @@
                 type: questionTypes.WB
             },
             {
-                question: "Western Blot中，封闭步骤的主要目的是什么？",
+                question: "Western Blot中，封闭的目的是什么？",
                 answers: [
                     { text: "阻止抗体非特异性结合到膜上", isCorrect: true },
                     { text: "增强蛋白质与膜的结合", isCorrect: false },
@@ -445,12 +445,12 @@
                 type: questionTypes.WB
             },
             {
-                question: "Western Blot检测中常用的显色底物不包括：",
+                question: "pei全称是什么？：",
                 answers: [
-                    { text: "DNA聚合酶", isCorrect: true },
-                    { text: "ECL试剂", isCorrect: false },
-                    { text: "NBT/BCIP", isCorrect: false },
-                    { text: "DAB", isCorrect: false }
+                    { text: "聚乙烯亚胺", isCorrect: true },
+                    { text: "十二烷基硫酸钠", isCorrect: false },
+                    { text: "不知道", isCorrect: false },
+                    { text: "水溶性高分子聚合物", isCorrect: false }
                 ],
                 type: questionTypes.WB
             },
@@ -521,12 +521,12 @@
                 type: questionTypes.GEL
             },
             {
-                question: "以下哪种染料不用于蛋白质凝胶染色？",
+                question: "sds的全称是什么？",
                 answers: [
-                    { text: "溴化乙锭（EB）", isCorrect: true },
-                    { text: "考马斯亮蓝（Coomassie Blue）", isCorrect: false },
-                    { text: "银染（Silver stain）", isCorrect: false },
-                    { text: "荧光染料（SYPRO Ruby）", isCorrect: false }
+                    { text: "十二烷基硫酸钠", isCorrect: true },
+                    { text: "考马斯亮蓝", isCorrect: false },
+                    { text: "阴离子表面活性剂", isCorrect: false },
+                    { text: "聚乙烯亚胺", isCorrect: false }
                 ],
                 type: questionTypes.GEL
             },
@@ -633,10 +633,10 @@
 
             // 修改开始界面文本
             document.querySelector('#start-screen h2').textContent = "zkx视角模拟器";
-            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答各种实验问题！";
+            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答老师问的各种实验问题！";
 
             // 修改状态栏标签
-            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "师姐心情值";
+            document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "刘老师心情值";
             document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[1].textContent = "你的知识水平";
 
             // 修改时间条样式
@@ -662,8 +662,8 @@
 
             // 修改结果界面标签
             // Additional UI text updates
-            document.querySelector('.font-bold.text-red-600.mb-1').textContent = "师姐：";
-            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "师姐心情：";
+            document.querySelector('.font-bold.text-red-600.mb-1').textContent = "刘老师：";
+            document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[0].textContent = "刘老师心情：";
             document.querySelectorAll('#result-screen .flex.justify-between.items-center.mb-1 span.text-sm')[1].textContent = "你的知识水平：";
         }
 
