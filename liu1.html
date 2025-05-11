@@ -341,14 +341,14 @@
         ];
 
         const positiveFeedback = [
-            "回答正确",
+            "cool",
             "很好",
             "对，就是这样！",
-            "答对了，继续保持！",
-            "嗯",
-            "正确！",
-            "对的，你掌握了要点！",
-            "完全正确"
+            "cool！",
+            "cool",
+            "cool！",
+            "cool！",
+            "cool！"
         ];
 
 
@@ -633,7 +633,7 @@
 
             // 修改开始界面文本
             document.querySelector('#start-screen h2').textContent = "zkx视角模拟器";
-            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答老师问的各种实验问题！";
+            document.querySelector('#start-screen p.mb-3').textContent = "警告：你需要快速回答刘老师问的各种实验问题！";
 
             // 修改状态栏标签
             document.querySelectorAll('.flex.justify-between.items-center.mb-1 span.text-sm.text-gray-600')[0].textContent = "刘老师心情值";
@@ -1006,19 +1006,19 @@
             // 设置结果描述
             if (highScore && highCorrect) {
                 // 双高 - 完美结局
-                resultTitle.textContent = "完美通关！";
+                resultTitle.textContent = "cool！";
                 resultDesc.textContent = "恭喜你！你精通了实验技术，是实验室里的传奇！";
                 resultBorder.className = "border-l-4 border-green-500 pl-3 mb-6";
                 document.getElementById('momo-final-quote').textContent = `"太厉害了！未来的院士/诺奖！"`;
             } else if (highScore && !highCorrect) {
                 // 高分低正确率 - 不错
-                resultTitle.textContent = "不错的胜利！";
+                resultTitle.textContent = "cool！";
                 resultDesc.textContent = "你的实验技术还有待提高！";
                 resultBorder.className = "border-l-4 border-pink-500 pl-3 mb-6";
                 document.getElementById('momo-final-quote').textContent = `"继续努力！"`;
             } else if (!highScore && highCorrect) {
                 // 低分高正确率 - 不错
-                resultTitle.textContent = "技术胜利！";
+                resultTitle.textContent = "cool！";
                 resultDesc.textContent = "你的实验进步很大";
                 resultBorder.className = "border-l-4 border-blue-500 pl-3 mb-6";
                 document.getElementById('momo-final-quote').textContent = `"多看看文献，认真听组会"`;
